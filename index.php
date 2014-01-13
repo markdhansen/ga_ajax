@@ -3,7 +3,8 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     </head> 
     <body> 
-        <form method="post" action="loginproc.php" id="admin_login">
+        <p><a href="#" id="admin-link">login</a></p>
+        <form id="admin_login" method="post" action="loginproc.php" id="admin_login">
             <fieldset>
                 <label for="name">Username</label>
                 <input type="text" name="user" id="name" class="text ui-widget-content ui-corner-all" />
@@ -89,7 +90,7 @@
                             if (bValid) {
                                 var data = $('#admin_login').serialize();
                                 $.ajax({
-                                    url: "class/loginproc.php",
+                                    url: "loginproc.php",
                                     type: "post",
                                     data: data,
                                     dataType: "json",
