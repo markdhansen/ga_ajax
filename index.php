@@ -14,7 +14,7 @@
             <button id="buttonpressme">Press Me</button>
         </p>
         <script>
-                $("buttonpressme").click(function() {
+                $("#buttonpressme").click(function() {
                     alert("Pressed!");
                 });
         </script>
