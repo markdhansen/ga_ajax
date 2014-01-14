@@ -9,6 +9,7 @@
         <link rel="shortcut icon" href="/docs-assets/ico/favicon.png">
         <link href="/css/bootstrap.css" rel="stylesheet">
         <link href="/css/navbar.css" rel="stylesheet">
+        <link href="/css/example.css" rel="stylesheet">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 
         <style>
