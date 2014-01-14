@@ -25,60 +25,23 @@
         <![endif]-->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 
-<!--        <style>
+        <style>
             body { font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif"; }
             label, input { display:block; }
             input.text { margin-bottom:12px; width:95%; padding: .4em; }
             fieldset { padding:0; border:0; margin-top:25px; }
             h1 { font-size: 1.2em; margin: .6em 0; }
-            div#users-contain { width: 350px; margin: 20px 0; }
-            div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
-            div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+            div#dialog-form { font-size: 62.5% }
             .ui-dialog .ui-state-error { padding: .3em; }
             .validateTips { border: 1px solid transparent; padding: 0.3em; }
-        </style>-->
+        </style>
 
     </head>
     <body>
 
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">GA Examples</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="./">Login</a></li>
-            <li class="active"><a href="./">Create Account</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-        <div class="container">
-
-            <!-- Main component for a primary marketing message or call to action -->
-            <div class="jumbotron">
-                <h1>Single page funnel</h1>
-                <p>This example illustrates how to use Google Analytics virtual pageviews to create a funnel that tracks
-                    conversion success for a multi-step account creation process.</p>
-                <p>
-                    <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View source &raquo;</a>
-                </p>
-            </div>
-
-        </div> <!-- /container -->
-
+        <!-- create account form -->
         <div id="dialog-form" class="signup-modal" title="Create new user">
             <p class="validateTips">All form fields are required.</p>
-
             <form>
                 <fieldset>
                     <label for="name">Name</label>
@@ -90,37 +53,62 @@
                 </fieldset>
             </form>
         </div>
-
-
-        <div id="users-contain" class="ui-widget">
-            <h1>Existing Users:</h1>
-            <table id="users" class="ui-widget ui-widget-content">
-                <thead>
-                    <tr class="ui-widget-header ">
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Password</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>john.doe@example.com</td>
-                        <td>johndoe1</td>
-                    </tr>
-                </tbody>
-            </table>
+        
+        <!-- Fixed navbar -->
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">GA Examples</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="javascript:void" id="login-menu-item">Login</a></li>
+                        <li><a href="javascript:void" id="create-account-menu-item">Create Account</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <button id="create-user">Create new user</button>
+
+        <div class="container">
+
+            <!-- Main component for a primary marketing message or call to action -->
+            <div class="jumbotron" id="description">
+
+                <h1>Single page funnel</h1>
+                <p>This example illustrates how to use Google Analytics virtual pageviews to create a funnel that tracks
+                    conversion success for a multi-step account creation process.</p>
+                <p>
+                    <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View source &raquo;</a>
+                </p>
+            </div>
+
+        </div> <!-- /container -->
 
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<!--        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>-->
+        <script src="//code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script src="js/bootstrap.js"></script>
         <script>
             $(function() {
+
+                $(".navbar-nav li").hover(
+                        function() {
+                            $(this).addClass("active");
+                        },
+                        function() {
+                            $(this).removeClass("active");
+                        }
+                );
+
                 var name = $("#name"),
                         email = $("#email"),
                         password = $("#password"),
@@ -162,6 +150,7 @@
                     height: 300,
                     width: 350,
                     modal: true,
+                    position: {my: "top", at: "top", of: $("#description")},
                     buttons: {
                         "Create an account": function() {
                             var bValid = true;
@@ -194,11 +183,11 @@
                     }
                 });
 
-                $("#create-user")
-                        .button()
+                $("#create-account-menu-item")
                         .click(function() {
                     $("#dialog-form").dialog("open");
                 });
+
             });
         </script>
     </body>
