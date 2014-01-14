@@ -77,7 +77,7 @@
 
         </div> <!-- /container -->
 
-        <div id="dialog-form" title="Create new user">
+        <div id="dialog-form" class="signup-modal" title="Create new user">
             <p class="validateTips">All form fields are required.</p>
 
             <form>
