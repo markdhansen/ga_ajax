@@ -26,12 +26,12 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 
         <style>
-            body { font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif"; }
+            body { font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif"; font-size: 11px; }
             label, input { display:block; }
             input.text { margin-bottom:12px; width:95%; padding: .4em; }
             fieldset { padding:0; border:0; margin-top:25px; }
             h1 { font-size: 1.2em; margin: .6em 0; }
-            div#dialog-form { font-size: 62.5% }
+            .navbar-nav { font-size: 14px; }
             .ui-dialog .ui-state-error { padding: .3em; }
             .validateTips { border: 1px solid transparent; padding: 0.3em; }
         </style>
@@ -44,7 +44,7 @@
             <p class="validateTips">All form fields are required.</p>
             <form>
                 <fieldset>
-                    <label for="name">Name</label>
+                    <label for="name">Username</label>
                     <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
                     <label for="email">Email</label>
                     <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all">
@@ -68,8 +68,8 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="javascript:void" id="login-menu-item">Login</a></li>
-                        <li><a href="javascript:void" id="create-account-menu-item">Create Account</a></li>
+                        <li><a href="javascript:void(0)" id="login-menu-item">Login</a></li>
+                        <li><a href="javascript:void(0)" id="create-account-menu-item">Create Account</a></li>
                     </ul>
                 </div>
             </div>
@@ -95,8 +95,8 @@
         <!-- Placed at the end of the document so the pages load faster -->
 <!--        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>-->
         <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-        <script src="js/bootstrap.js"></script>
+        <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script src="../js/bootstrap.js"></script>
         <script>
             $(function() {
 
@@ -148,7 +148,7 @@
                 $("#dialog-form").dialog({
                     autoOpen: false,
                     height: 350,
-                    width: 350,
+                    width: 300,
                     modal: true,
                     position: {my: "top", at: "top", of: $("#description")},
                     buttons: {
@@ -171,6 +171,7 @@
                                         "<td>" + email.val() + "</td>" +
                                         "<td>" + password.val() + "</td>" +
                                         "</tr>");
+                                alert("creating the account ...");
                                 $(this).dialog("close");
                             }
                         },
@@ -187,7 +188,6 @@
                         .click(function() {
                     $("#dialog-form").dialog("open");
                 });
-
             });
         </script>
     </body>

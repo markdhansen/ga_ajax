@@ -1,0 +1,4 @@
+database: gaexamples
+pwd: daint4toot
+port: 8889
+
