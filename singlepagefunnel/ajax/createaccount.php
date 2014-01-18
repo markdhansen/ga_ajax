@@ -1,4 +1,27 @@
 <?php
+require_once '/Applications/MAMP/Swift-5.0.3/lib/swift_required.php';
+$transporter = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
+  ->setUsername("markdhansen@gmail.com")
+  ->setPassword("Karma8691");
+$mailer = Swift_Mailer::newInstance($transporter);
+$message = Swift_Message::newInstance()
+
+  // Give the message a subject
+  ->setSubject('Your subject')
+
+  // Set the From address with an associative array
+  ->setFrom(array('markdhansen@gmail.com' => 'Mark Hansen'))
+
+  // Set the To addresses with an associative array
+  ->setTo(array('mark@hansen5.com', 'mark@megalytic.com'))
+
+  // Give it a body
+  ->setBody('Your verification code for GA Examples: ' . 'dfgrt');
+
+// Send the message
+$mailingResult = $mailer->send($message);
+error_log("mailingResult = " . $mailingResult);
+
 
 $success = false;
 $verificationcode = "";

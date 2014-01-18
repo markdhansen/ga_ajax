@@ -23,7 +23,7 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 
         <style>
             body { font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif"; }
@@ -82,7 +82,7 @@
             <!-- Placed at the end of the document so the pages load faster -->
     <!--        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>-->
             <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-            <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+            <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
             <script src="js/bootstrap.js"></script>
             <script>
                 $(function() {
