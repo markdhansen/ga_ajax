@@ -1,26 +1,11 @@
 <?php
-require_once '/Applications/MAMP/Swift-5.0.3/lib/swift_required.php';
-$transporter = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
-  ->setUsername("markdhansen@gmail.com")
-  ->setPassword("Karma8691");
-$mailer = Swift_Mailer::newInstance($transporter);
-$message = Swift_Message::newInstance()
 
-  // Give the message a subject
-  ->setSubject('Your subject')
+// remove Swift
+// require_once '/Applications/MAMP/Swift-5.0.3/lib/swift_required.php';
 
-  // Set the From address with an associative array
-  ->setFrom(array('markdhansen@gmail.com' => 'Mark Hansen'))
+$wasMailSent = mail('Mark Hansen <mark@megalytic.com>', 'testing mail from php', 'Hey Mark - did you receive this?\r\n\r\nYour verification code is: dfgrt', 'From: Mark Hansen <mark@gaexamples.com>', 'Reply-To: mark@gaexamples.com');
 
-  // Set the To addresses with an associative array
-  ->setTo(array('mark@hansen5.com', 'mark@megalytic.com'))
-
-  // Give it a body
-  ->setBody('Your verification code for GA Examples: ' . 'dfgrt');
-
-// Send the message
-$mailingResult = $mailer->send($message);
-error_log("mailingResult = " . $mailingResult);
+error_log("wasMailSent = " . $wasMailSent);
 
 
 $success = false;
