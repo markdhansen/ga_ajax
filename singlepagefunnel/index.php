@@ -178,7 +178,7 @@
 
                             if (bValid) {
                                 $.ajax({
-                                    url: 'ajax/createaccount.php',
+                                    url: 'ajax/createAccount.php',
                                     type: "POST",
                                     data: {
                                         username: username.val(),
@@ -186,12 +186,36 @@
                                         password: password.val()
                                     },
                                     dataType: "JSON"
-                                }).done(function(resp) {
-                                    console.log("resp = " + resp);
-                                    console.log("respObj.success = " + resp.success);
-                                    console.log("respObj.verificationcode = " + resp.verificationcode);
-                                    console.log("respObj.failureMsg = " + resp.failureMsg);
-                                    $("#verify-account-dialog").dialog("open");
+                                }).done(function(respCreateAccount) {
+                                    console.log("respCreateAccount.success = " + respCreateAccount.success);
+                                    console.log("respCreateAccount.email = " + respCreateAccount.email);                                    
+                                    console.log("respCreateAccount.verificationcode = " + respCreateAccount.verificationcode);
+                                    console.log("respCreateAccount.failureMsg = " + respCreateAccount.failureMsg);
+                                    if (respCreateAccount.email) {
+                                        $.ajax({
+                                            url: 'ajax/sendVerificationEmail.php',
+                                            type: "POST",
+                                            data: {
+                                                email: respCreateAccount.email,
+                                                verificationcode: respCreateAccount.verificationcode
+                                            },
+                                            dataType: "JSON"
+                                        }).done(function(respSendEmail) {
+                                            console.log("respSendEmail.success = " + respSendEmail.success);
+                                            console.log("respSendEmail.failureMsg = " + respSendEmail.failureMsg);
+                                            if (respSendEmail.success) {
+                                                $("#verify-account-dialog").dialog("open");
+                                            } else {
+                                                alert(respSendEmail.failureMsg);
+                                            }
+
+                                        })
+                                                .fail(function() {
+                                            console.log("POST failed!");
+                                        });
+                                    } else {
+                                        alert(respCreateAccount.failureMsg);
+                                    }
                                 })
                                         .fail(function() {
                                     console.log("POST failed!");

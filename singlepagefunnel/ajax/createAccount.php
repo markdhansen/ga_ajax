@@ -1,11 +1,16 @@
 <?php
 
-// remove Swift
-// require_once '/Applications/MAMP/Swift-5.0.3/lib/swift_required.php';
+$errorLog = ini_get('error_log');
+$isMamp = false;
+if (strpos($errorLog, 'MAMP') !== false) {
+    $isMamp = true;
+}
 
-$wasMailSent = mail('Mark Hansen <mark@megalytic.com>', 'testing mail from php', 'Hey Mark - did you receive this?'."\r\n\r\n",'Your verification code is: dfgrt', 'From: Mark Hansen <mark@gaexamples.com>', 'Reply-To: mark@gaexamples.com');
-
-error_log("wasMailSent = " . $wasMailSent);
+//$wasMailSent = mail(
+//        'Mark Hansen <mark@megalytic.com>', 'testing mail from php', 'Hey Mark - did you receive this?' . "\r\n\r\n" . 'Your verification code is: dfgrt', 'From: Mark Hansen <mark@gaexamples.com>' . "\r\n" .
+//        'Reply-To: mark@gaexamples.com');
+//
+//error_log("wasMailSent = " . $wasMailSent);
 
 
 $success = false;
@@ -15,8 +20,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // error_log('$_POST = ' . print_r($_POST, true));
     if (!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password'])) {
 
-        // $conn = new mysqli("localhost", "gaexamples", "daint4toot", "gaexamples", 8889);
-        $conn = new mysqli("localhost", "gaexamples", "kraftz87pup", "gaexamples", 3306);
+        if ($isMamp) {
+            $conn = new mysqli("localhost", "gaexamples", "daint4toot", "gaexamples", 8889);
+        } else {
+            $conn = new mysqli("localhost", "gaexamples", "kraftz87pup", "gaexamples", 3306);
+        }
         if ($conn->connect_errno) {
             error_log(sprintf("Connect failed (%s): %s\n", $conn->connect_errno, $conn->connect_error));
         } else {
@@ -55,5 +63,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-echo json_encode(array('success' => $success, 'verificationcode' => $verificationcode, 'failureMsg' => $failureMsg));
+echo json_encode(array('success' => $success, 'email' => $_POST['email'], 'verificationcode' => $verificationcode, 'failureMsg' => $failureMsg));
 ?>
