@@ -156,6 +156,8 @@
                     }
                 }
 
+                var accountInfo = {};
+
                 $("#create-account-dialog").dialog({
                     autoOpen: false,
                     height: 350,
@@ -188,9 +190,11 @@
                                     dataType: "JSON"
                                 }).done(function(respCreateAccount) {
                                     console.log("respCreateAccount.success = " + respCreateAccount.success);
-                                    console.log("respCreateAccount.email = " + respCreateAccount.email);                                    
+                                    console.log("respCreateAccount.email = " + respCreateAccount.email);
                                     console.log("respCreateAccount.verificationcode = " + respCreateAccount.verificationcode);
                                     console.log("respCreateAccount.failureMsg = " + respCreateAccount.failureMsg);
+                                    accountInfo.email = respCreateAccount.email;
+                                    accountInfo.account = respCreateAccount.username;
                                     if (respCreateAccount.email) {
                                         $.ajax({
                                             url: 'ajax/sendVerificationEmail.php',
@@ -240,29 +244,29 @@
                     position: {my: "top", at: "top", of: $("#description")},
                     buttons: {
                         "Verify account": function() {
-
                             verificationInput = $("#verificationInput").val();
-                            username = "?";
-                            email = "?";
                             // check verification code in database
-//                                $.ajax({
-//                                    url: 'ajax/createaccount.php',
-//                                    type: "POST",
-//                                    data: {
-//                                        username: username.val(),
-//                                        email: email.val(),
-//                                        password: password.val()
-//                                    },
-//                                    dataType: "JSON"
-//                                }).done(function(resp) {
-//                                    console.log("resp = " + resp);
-//                                    console.log("respObj.success = " + resp.success);
-//                                    console.log("respObj.verificationcode = " + resp.verificationcode);
-//                                    console.log("respObj.failureMsg = " + resp.failureMsg);
-//                                })
-//                                        .fail(function() {
-//                                    console.log("POST failed!");
-//                                });
+                            $.ajax({
+                                url: 'ajax/checkVerificationCode.php',
+                                type: "POST",
+                                data: {
+                                    username: accountInfo.account,
+                                    email: accountInfo.email,
+                                    verificationcode: verificationInput
+                                },
+                                dataType: "JSON"
+                            }).done(function(resp) {
+                                console.log("resp.success = " + resp.success);
+                                console.log("resp.failureMsg = " + resp.failureMsg);
+                                if (resp.success) {
+                                    alert("Congrats!  You have verified your account.");
+                                } else {
+                                    alert("Bummer. " + resp.failureMsg);
+                                }
+                            })
+                                    .fail(function() {
+                                console.log("POST failed!");
+                            });
                             $(this).dialog("close");
                         },
                         Cancel: function() {
