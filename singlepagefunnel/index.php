@@ -54,6 +54,19 @@
             </form>
         </div>
 
+        <!-- login account form -->
+        <div id="login-account-dialog" class="signup-modal" title="Login to your account">
+            <p class="validateTips">All form fields are required.</p>
+            <form>
+                <fieldset>
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="login-email" value="" class="text ui-widget-content ui-corner-all">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="login-password" value="" class="text ui-widget-content ui-corner-all">
+                </fieldset>
+            </form>
+        </div>        
+
         <!-- verify account form -->
         <div id="verify-account-dialog" class="signup-modal" title="Verify account">
             <p class="validateTips">All form fields are required.</p>
@@ -63,7 +76,7 @@
                     <input type="text" name="verificationInput" id="verificationInput" class="text ui-widget-content ui-corner-all">
                 </fieldset>
             </form>
-        </div>        
+        </div>      
 
         <!-- Fixed navbar -->
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -123,6 +136,8 @@
                 var username = $("#username"),
                         email = $("#email"),
                         password = $("#password"),
+                        loginEmail = $("#login-email"),
+                        loginPassword = $("#login-password"),
                         allFields = $([]).add(username).add(email).add(password),
                         tips = $(".validateTips");
 
@@ -236,6 +251,61 @@
                     }
                 });
 
+                $("#login-account-dialog").dialog({
+                    autoOpen: false,
+                    height: 275,
+                    width: 300,
+                    modal: true,
+                    position: {my: "top", at: "top", of: $("#description")},
+                    buttons: {
+                        "Login": function() {
+                            var bValid = true;
+                            allFields.removeClass("ui-state-error");
+
+                            bValid = bValid && checkLength(loginEmail, "email", 6, 80);
+                            bValid = bValid && checkLength(loginPassword, "password", 5, 16);
+
+                            // From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
+                            bValid = bValid && checkRegexp(loginEmail, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "eg. ui@jquery.com");
+                            bValid = bValid && checkRegexp(loginPassword, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
+
+                            if (bValid) {
+                                $.ajax({
+                                    url: 'ajax/loginAccount.php',
+                                    type: "POST",
+                                    data: {
+                                        email: loginEmail.val(),
+                                        password: loginPassword.val()
+                                    },
+                                    dataType: "JSON"
+                                }).done(function(resp) {
+                                    console.log("resp.success = " + resp.success);
+                                    console.log("resp.username = " + resp.username);
+                                    console.log("resp.email = " + resp.email);
+                                    console.log("resp.failureMsg = " + resp.failureMsg);
+                                    accountInfo.email = resp.email;
+                                    accountInfo.account = resp.username;
+                                    if (resp.success) {
+                                        alert("Congratulations!  You are logged in with username: " + resp.username);
+                                    } else {
+                                        alert("Bummer, login failed. " + resp.failureMsg);
+                                    }
+                                })
+                                        .fail(function() {
+                                    console.log("POST failed!");
+                                });
+                                $(this).dialog("close");
+                            }
+                        },
+                        Cancel: function() {
+                            $(this).dialog("close");
+                        }
+                    },
+                    close: function() {
+                        allFields.val("").removeClass("ui-state-error");
+                    }
+                });
+
                 $("#verify-account-dialog").dialog({
                     autoOpen: false,
                     height: 350,
@@ -281,6 +351,11 @@
                 $("#create-account-menu-item")
                         .click(function() {
                     $("#create-account-dialog").dialog("open");
+                });
+
+                $("#login-menu-item")
+                        .click(function() {
+                    $("#login-account-dialog").dialog("open");
                 });
             });
         </script>
