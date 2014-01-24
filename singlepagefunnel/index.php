@@ -35,7 +35,7 @@
             .ui-dialog .ui-state-error { padding: .3em; }
             .validateTips { border: 1px solid transparent; padding: 0.3em; }
         </style>
-
+        <?php include_once("analyticstracking.php") ?>
     </head>
     <body>
 

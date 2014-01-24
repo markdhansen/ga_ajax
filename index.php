@@ -36,7 +36,7 @@
             a:visited {color:#0000FF;}      /* visited link */            
             a:hover {color:#009900;}  /* mouse over link */
         </style>
-
+        <?php include_once("analyticstracking.php") ?>
     </head>
     <body>
 
