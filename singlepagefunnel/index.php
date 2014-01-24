@@ -210,7 +210,7 @@
                                     console.log("respCreateAccount.failureMsg = " + respCreateAccount.failureMsg);
                                     accountInfo.email = respCreateAccount.email;
                                     accountInfo.account = respCreateAccount.username;
-                                    if (respCreateAccount.email) {
+                                    if (respCreateAccount.success && respCreateAccount.email) {
 
                                         var _gaq = _gaq || [];
                                         _gaq.push(['_trackPageview', '/user/create-account/submit']);
