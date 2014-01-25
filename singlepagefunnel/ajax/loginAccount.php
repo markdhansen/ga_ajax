@@ -45,5 +45,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-echo json_encode(array('success' => $success, 'email' => $_POST['email'], 'username' => $username, 'verified' => $verified, failureMsg' => $failureMsg));
+echo json_encode(array('success' => $success, 'email' => $_POST['email'], 'username' => $username, 'verified' => $verified, 'failureMsg' => $failureMsg));
 ?>
