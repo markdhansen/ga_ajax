@@ -204,10 +204,10 @@
                                     },
                                     dataType: "JSON"
                                 }).done(function(respCreateAccount) {
-                                    console.log("respCreateAccount.success = " + respCreateAccount.success);
-                                    console.log("respCreateAccount.email = " + respCreateAccount.email);
-                                    console.log("respCreateAccount.verificationcode = " + respCreateAccount.verificationcode);
-                                    console.log("respCreateAccount.failureMsg = " + respCreateAccount.failureMsg);
+//                                    console.log("respCreateAccount.success = " + respCreateAccount.success);
+//                                    console.log("respCreateAccount.email = " + respCreateAccount.email);
+//                                    console.log("respCreateAccount.verificationcode = " + respCreateAccount.verificationcode);
+//                                    console.log("respCreateAccount.failureMsg = " + respCreateAccount.failureMsg);
                                     accountInfo.email = respCreateAccount.email;
                                     accountInfo.account = respCreateAccount.username;
                                     if (respCreateAccount.success && respCreateAccount.email) {
@@ -225,8 +225,8 @@
                                             },
                                             dataType: "JSON"
                                         }).done(function(respSendEmail) {
-                                            console.log("respSendEmail.success = " + respSendEmail.success);
-                                            console.log("respSendEmail.failureMsg = " + respSendEmail.failureMsg);
+//                                            console.log("respSendEmail.success = " + respSendEmail.success);
+//                                            console.log("respSendEmail.failureMsg = " + respSendEmail.failureMsg);
                                             if (respSendEmail.success) {
                                                 $("#verify-account-dialog").dialog("open");
                                                 var _gaq = _gaq || [];
@@ -295,10 +295,10 @@
                                     },
                                     dataType: "JSON"
                                 }).done(function(resp) {
-                                    console.log("resp.success = " + resp.success);
-                                    console.log("resp.username = " + resp.username);
-                                    console.log("resp.email = " + resp.email);
-                                    console.log("resp.failureMsg = " + resp.failureMsg);
+//                                    console.log("resp.success = " + resp.success);
+//                                    console.log("resp.username = " + resp.username);
+//                                    console.log("resp.email = " + resp.email);
+//                                    console.log("resp.failureMsg = " + resp.failureMsg);
                                     accountInfo.email = resp.email;
                                     accountInfo.account = resp.username;
                                     if (resp.success) {
@@ -347,8 +347,8 @@
                                 },
                                 dataType: "JSON"
                             }).done(function(resp) {
-                                console.log("resp.success = " + resp.success);
-                                console.log("resp.failureMsg = " + resp.failureMsg);
+//                                console.log("resp.success = " + resp.success);
+//                                console.log("resp.failureMsg = " + resp.failureMsg);
                                 if (resp.success) {
                                     alert("Congrats!  You have verified your account.");
                                     var _gaq = _gaq || [];
