@@ -211,8 +211,7 @@
                                     accountInfo.email = respCreateAccount.email;
                                     accountInfo.account = respCreateAccount.username;
                                     if (respCreateAccount.success && respCreateAccount.email) {
-
-                                        var _gaq = _gaq || [];
+                                        
                                         _gaq.push(['_trackPageview', '/user/create-account/submit']);
                                         console.log('/user/create-account/submit');
 
@@ -229,23 +228,26 @@
 //                                            console.log("respSendEmail.failureMsg = " + respSendEmail.failureMsg);
                                             if (respSendEmail.success) {
                                                 $("#verify-account-dialog").dialog("open");
-                                                var _gaq = _gaq || [];
+
                                                 _gaq.push(['_trackPageview', '/user/create-account/verify/open']);
                                                 console.log('/user/create-account/verify/open');
+                                                
                                             } else {
                                                 alert(respSendEmail.failureMsg);
-                                                var _gaq = _gaq || [];
+
                                                 _gaq.push(['_trackPageview', '/user/create-account/email-failed']);
                                                 console.log('/user/create-account/email-failed');
+                                                
                                             }
                                         })
                                                 .fail(function() {
                                             console.log("POST failed!");
                                         });
                                     } else {
-                                        var _gaq = _gaq || [];
+
                                         _gaq.push(['_trackPageview', '/user/create-account/submit-failed']);
                                         console.log('/user/create-account/submit-failed');
+                                        
                                         alert(respCreateAccount.failureMsg);
                                     }
                                 })
@@ -257,9 +259,10 @@
                         },
                         Cancel: function() {
                             $(this).dialog("close");
-                            var _gaq = _gaq || [];
+
                             _gaq.push(['_trackPageview', '/user/create-account/cancel']);
                             console.log('/user/create-account/cancel');
+                            
                         }
                     },
                     close: function() {
@@ -331,7 +334,6 @@
                     buttons: {
                         "Verify account": function() {
 
-                            var _gaq = _gaq || [];
                             _gaq.push(['_trackPageview', '/user/create-account/verify/submit']);
                             console.log('/user/create-account/verify/submit');
 
@@ -351,13 +353,15 @@
 //                                console.log("resp.failureMsg = " + resp.failureMsg);
                                 if (resp.success) {
                                     alert("Congrats!  You have verified your account.");
-                                    var _gaq = _gaq || [];
+
                                     _gaq.push(['_trackPageview', '/user/create-account/success']);
                                     console.log('/user/create-account/success');
+                                    
                                 } else {
-                                    var _gaq = _gaq || [];
+
                                     _gaq.push(['_trackPageview', '/user/create-account/verify/failed']);
                                     console.log('/user/create-account/verify/failed');
+                                    
                                     alert("Bummer. " + resp.failureMsg);
                                 }
                             })
@@ -368,9 +372,10 @@
                         },
                         Cancel: function() {
                             $(this).dialog("close");
-                            var _gaq = _gaq || [];
+
                             _gaq.push(['_trackPageview', '/user/create-account/verify/canceled']);
                             console.log('/user/create-account/verify/canceled');
+                            
                         }
                     },
                     close: function() {
@@ -381,16 +386,19 @@
                 $("#create-account-menu-item")
                         .click(function() {
                     $("#create-account-dialog").dialog("open");
-                    var _gaq = _gaq || [];
+ 
                     _gaq.push(['_trackPageview', '/user/create-account/open']);
                     console.log('/user/create-account/open');
+                    
                 });
 
                 $("#login-menu-item")
                         .click(function() {
                     $("#login-account-dialog").dialog("open");
+                    
                     _gaq.push(['_trackPageview', '/user/login/open']);
                     console.log('/user/login/open');
+                    
                 });
             });
         </script>
