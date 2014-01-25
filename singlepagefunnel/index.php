@@ -88,7 +88,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="../">GA Examples</a>
+                    <a class="navbar-brand" href="/">GA Examples</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -181,6 +181,10 @@
                     position: {my: "top", at: "top", of: $("#description")},
                     buttons: {
                         "Create an account": function() {
+
+                            _gaq.push(['_trackPageview', '/user/create-account/submit']);
+                            console.log('/user/create-account/submit');
+
                             var bValid = true;
                             allFields.removeClass("ui-state-error");
 
@@ -204,16 +208,9 @@
                                     },
                                     dataType: "JSON"
                                 }).done(function(respCreateAccount) {
-//                                    console.log("respCreateAccount.success = " + respCreateAccount.success);
-//                                    console.log("respCreateAccount.email = " + respCreateAccount.email);
-//                                    console.log("respCreateAccount.verificationcode = " + respCreateAccount.verificationcode);
-//                                    console.log("respCreateAccount.failureMsg = " + respCreateAccount.failureMsg);
                                     accountInfo.email = respCreateAccount.email;
                                     accountInfo.account = respCreateAccount.username;
                                     if (respCreateAccount.success && respCreateAccount.email) {
-
-                                        _gaq.push(['_trackPageview', '/user/create-account/submit']);
-                                        console.log('/user/create-account/submit');
 
                                         $.ajax({
                                             url: 'ajax/sendVerificationEmail.php',
@@ -224,8 +221,7 @@
                                             },
                                             dataType: "JSON"
                                         }).done(function(respSendEmail) {
-//                                            console.log("respSendEmail.success = " + respSendEmail.success);
-//                                            console.log("respSendEmail.failureMsg = " + respSendEmail.failureMsg);
+
                                             if (respSendEmail.success) {
                                                 $("#verify-account-dialog").dialog("open");
 
@@ -259,10 +255,11 @@
                             }
                         },
                         Cancel: function() {
-                            $(this).dialog("close");
 
                             _gaq.push(['_trackPageview', '/user/create-account/cancel']);
                             console.log('/user/create-account/cancel');
+
+                            $(this).dialog("close");
 
                         }
                     },
@@ -279,6 +276,7 @@
                     position: {my: "top", at: "top", of: $("#description")},
                     buttons: {
                         "Login": function() {
+
                             var bValid = true;
                             allFields.removeClass("ui-state-error");
 
@@ -290,6 +288,10 @@
                             bValid = bValid && checkRegexp(loginPassword, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
 
                             if (bValid) {
+
+                                _gaq.push(['_trackPageview', '/user/login/submit']);
+                                console.log('/user/login/submit');
+
                                 $.ajax({
                                     url: 'ajax/loginAccount.php',
                                     type: "POST",
@@ -299,15 +301,23 @@
                                     },
                                     dataType: "JSON"
                                 }).done(function(resp) {
-//                                    console.log("resp.success = " + resp.success);
-//                                    console.log("resp.username = " + resp.username);
-//                                    console.log("resp.email = " + resp.email);
-//                                    console.log("resp.failureMsg = " + resp.failureMsg);
                                     accountInfo.email = resp.email;
                                     accountInfo.account = resp.username;
                                     if (resp.success) {
+
+                                        _gaq.push(['_trackPageview', '/user/login/success']);
+                                        console.log('/user/login/success');
+
                                         alert("Congratulations!  You are logged in with username: " + resp.username);
                                     } else {
+                                        if (resp.verified) {
+                                            _gaq.push(['_trackPageview', '/user/login/fail']);
+                                            console.log('/user/login/fail');
+                                        } else {
+                                            _gaq.push(['_trackPageview', '/user/login/account-not-verified']);
+                                            console.log('/user/login/account-not-verified');
+                                        }
+
                                         alert("Bummer, login failed. " + resp.failureMsg);
                                     }
                                 })
@@ -318,6 +328,10 @@
                             }
                         },
                         Cancel: function() {
+
+                            _gaq.push(['_trackPageview', '/user/login/cancel']);
+                            console.log('/user/login/cancel');
+
                             $(this).dialog("close");
                         }
                     },
@@ -350,8 +364,6 @@
                                 },
                                 dataType: "JSON"
                             }).done(function(resp) {
-//                                console.log("resp.success = " + resp.success);
-//                                console.log("resp.failureMsg = " + resp.failureMsg);
                                 if (resp.success) {
 
                                     _gaq.push(['_trackPageview', '/user/create-account/success']);
@@ -373,10 +385,11 @@
                             $(this).dialog("close");
                         },
                         Cancel: function() {
-                            $(this).dialog("close");
 
                             _gaq.push(['_trackPageview', '/user/create-account/verify/canceled']);
                             console.log('/user/create-account/verify/canceled');
+
+                            $(this).dialog("close");
 
                         }
                     },

@@ -23,14 +23,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             error_log(sprintf("Connect failed (%s): %s\n", $conn->connect_errno, $conn->connect_error));
         } else {
             // get password
-            $sqlPassword = "SELECT password, username FROM singlepagefunnel WHERE email = ?";
+            $sqlPassword = "SELECT password, username, verified FROM singlepagefunnel WHERE email = ?";
             $stmt = $conn->prepare($sqlPassword);
             $stmt->bind_param('s', $_POST['email']);
             $stmt->execute();
-            $stmt->bind_result($passwordInDb, $username);
+            $stmt->bind_result($passwordInDb, $username, $verified);
             if ($stmt->fetch()) {
-                if ($passwordInDb == $_POST['password']) {
+                if ($passwordInDb == $_POST['password'] && $verified) {
                     $success = true;
+                } else if (!$verified) {
+                    $failureMsg = "Account is not verified.";
                 } else if (empty($passwordInDb)) {
                     $failureMsg = "No password found for email: " . $_POST['email'];
                 } else {
@@ -43,5 +45,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-echo json_encode(array('success' => $success, 'email' => $_POST['email'], 'username' => $username, 'failureMsg' => $failureMsg));
+echo json_encode(array('success' => $success, 'email' => $_POST['email'], 'username' => $username, 'verified' => $verified, failureMsg' => $failureMsg));
 ?>
