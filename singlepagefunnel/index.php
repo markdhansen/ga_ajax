@@ -355,12 +355,10 @@
                                     _gaq.push(['_trackPageview', '/user/create-account/success']);
                                     console.log('/user/create-account/success');
                                 } else {
-                                    alert("Bummer. " + resp.failureMsg);
-
                                     var _gaq = _gaq || [];
                                     _gaq.push(['_trackPageview', '/user/create-account/verify/failed']);
                                     console.log('/user/create-account/verify/failed');
-
+                                    alert("Bummer. " + resp.failureMsg);
                                 }
                             })
                                     .fail(function() {
@@ -391,7 +389,7 @@
                 $("#login-menu-item")
                         .click(function() {
                     $("#login-account-dialog").dialog("open");
-                    _gaq.push(['_trackPageview', '/user/login/open']);     
+                    _gaq.push(['_trackPageview', '/user/login/open']);
                     console.log('/user/login/open');
                 });
             });
