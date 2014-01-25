@@ -211,7 +211,7 @@
                                     accountInfo.email = respCreateAccount.email;
                                     accountInfo.account = respCreateAccount.username;
                                     if (respCreateAccount.success && respCreateAccount.email) {
-                                        
+
                                         _gaq.push(['_trackPageview', '/user/create-account/submit']);
                                         console.log('/user/create-account/submit');
 
@@ -231,13 +231,14 @@
 
                                                 _gaq.push(['_trackPageview', '/user/create-account/verify/open']);
                                                 console.log('/user/create-account/verify/open');
-                                                
+
                                             } else {
-                                                alert(respSendEmail.failureMsg);
 
                                                 _gaq.push(['_trackPageview', '/user/create-account/email-failed']);
                                                 console.log('/user/create-account/email-failed');
-                                                
+
+                                                alert(respSendEmail.failureMsg);
+
                                             }
                                         })
                                                 .fail(function() {
@@ -247,7 +248,7 @@
 
                                         _gaq.push(['_trackPageview', '/user/create-account/submit-failed']);
                                         console.log('/user/create-account/submit-failed');
-                                        
+
                                         alert(respCreateAccount.failureMsg);
                                     }
                                 })
@@ -262,7 +263,7 @@
 
                             _gaq.push(['_trackPageview', '/user/create-account/cancel']);
                             console.log('/user/create-account/cancel');
-                            
+
                         }
                     },
                     close: function() {
@@ -352,16 +353,17 @@
 //                                console.log("resp.success = " + resp.success);
 //                                console.log("resp.failureMsg = " + resp.failureMsg);
                                 if (resp.success) {
-                                    alert("Congrats!  You have verified your account.");
 
                                     _gaq.push(['_trackPageview', '/user/create-account/success']);
                                     console.log('/user/create-account/success');
-                                    
+
+                                    alert("Congrats!  You have verified your account.");
+
                                 } else {
 
                                     _gaq.push(['_trackPageview', '/user/create-account/verify/failed']);
                                     console.log('/user/create-account/verify/failed');
-                                    
+
                                     alert("Bummer. " + resp.failureMsg);
                                 }
                             })
@@ -375,7 +377,7 @@
 
                             _gaq.push(['_trackPageview', '/user/create-account/verify/canceled']);
                             console.log('/user/create-account/verify/canceled');
-                            
+
                         }
                     },
                     close: function() {
@@ -386,19 +388,19 @@
                 $("#create-account-menu-item")
                         .click(function() {
                     $("#create-account-dialog").dialog("open");
- 
+
                     _gaq.push(['_trackPageview', '/user/create-account/open']);
                     console.log('/user/create-account/open');
-                    
+
                 });
 
                 $("#login-menu-item")
                         .click(function() {
                     $("#login-account-dialog").dialog("open");
-                    
+
                     _gaq.push(['_trackPageview', '/user/login/open']);
                     console.log('/user/login/open');
-                    
+
                 });
             });
         </script>
