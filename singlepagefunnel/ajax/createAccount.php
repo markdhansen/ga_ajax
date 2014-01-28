@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } else {
                     $stmtEmail->close();
                     // insert new account
-                    $sqlInsert = "INSERT INTO singlepagefunnel VALUES (?, ?, ?, ?)";
+                    $sqlInsert = "INSERT INTO singlepagefunnel VALUES (?, ?, ?, ?, 0)";
                     $stmtInsert = $conn->prepare($sqlInsert);
                     if ($stmtInsert) {
                         // generate random 5 character verification code
@@ -61,9 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $stmtInsert->bind_param('ssss', $_POST['username'], $_POST['email'], $_POST['password'], $verificationcode);
                         $success = $stmtInsert->execute();
                     } else {
-                        error_log("SQL failed to execute.  Here is error.");
-                        error_log(mysqli_error($conn));
-                        error_log("******** end var_dump ********");
+                        error_log("SQL failed to execute: " . mysqli_error($conn));
+                        $failureMsg = mysqli_error($conn);
                     }
                 }
             }
