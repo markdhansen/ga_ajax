@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $success = $stmtInsert->execute();
                     } else {
                         error_log("SQL failed to execute: " . $stmtInsert->error);
+                        error_log(var_export($stmtInsert));
                     }
                 }
             }
