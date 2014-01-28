@@ -61,8 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $stmtInsert->bind_param('ssss', $_POST['username'], $_POST['email'], $_POST['password'], $verificationcode);
                         $success = $stmtInsert->execute();
                     } else {
-                        error_log("SQL failed to execute.  Here is var_dump.");
-                        error_log(var_export($stmtInsert));
+                        error_log("SQL failed to execute.  Here is error.");
+                        error_log(mysqli_error($conn));
                         error_log("******** end var_dump ********");
                     }
                 }
