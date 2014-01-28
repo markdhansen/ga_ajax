@@ -39,24 +39,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 // check if email already exists
                 $sqlEmail = "SELECT * FROM singlepagefunnel WHERE email = ?";
-                $stmt = $conn->prepare($sqlEmail);
-                $stmt->bind_param('s', $_POST['email']);
-                $stmt->execute();
-                $stmt->store_result();
-                if ($stmt->num_rows > 0) {
+                $stmtEmail = $conn->prepare($sqlEmail);
+                $stmtEmail->bind_param('s', $_POST['email']);
+                $stmtEmail->execute();
+                $stmtEmail->store_result();
+                if ($stmtEmail->num_rows > 0) {
                     $failureMsg = "Email already exists: " . $_POST['email'];
                 } else {
                     // insert new account
-                    $sql = "INSERT INTO singlepagefunnel VALUES (?, ?, ?, ?)";
-                    $stmt = $conn->prepare($sql);
+                    $sqlInsert = "INSERT INTO singlepagefunnel VALUES (?, ?, ?, ?)";
+                    $stmtInsert = $conn->prepare($sqlInsert);
                     // generate random 5 character verification code
                     $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
                     $verificationcode = '';
                     for ($i = 0; $i < 5; $i++) {
                         $verificationcode .= $characters[rand(0, strlen($characters) - 1)];
                     }
-                    $stmt->bind_param('ssss', $_POST['username'], $_POST['email'], $_POST['password'], $verificationcode);
-                    $success = $stmt->execute();
+                    $stmtInsert->bind_param('ssss', $_POST['username'], $_POST['email'], $_POST['password'], $verificationcode);
+                    $success = $stmtInsert->execute();
                 }
             }
             mysqli_close($conn);
