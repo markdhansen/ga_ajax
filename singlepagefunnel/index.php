@@ -182,9 +182,6 @@
                     buttons: {
                         "Create an account": function() {
 
-                            _gaq.push(['_trackPageview', '/user/create-account/submit']);
-                            console.log('/user/create-account/submit');
-
                             var bValid = true;
                             allFields.removeClass("ui-state-error");
 
@@ -198,6 +195,10 @@
                             bValid = bValid && checkRegexp(password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
 
                             if (bValid) {
+                                
+                                                            _gaq.push(["_trackPageview", "/user/create-account/submit"]);
+                            console.log('_gaq.push(["_trackPageview", "/user/create-account/submit"]);');
+                            
                                 $.ajax({
                                     url: 'ajax/createAccount.php',
                                     type: "POST",
@@ -225,13 +226,13 @@
                                             if (respSendEmail.success) {
                                                 $("#verify-account-dialog").dialog("open");
 
-                                                _gaq.push(['_trackPageview', '/user/create-account/verify/open']);
-                                                console.log('/user/create-account/verify/open');
+                                                _gaq.push(["_trackPageview", "/user/create-account/verify/open"]);
+                                                console.log('_gaq.push(["_trackPageview", "/user/create-account/verify/open"]);');
 
                                             } else {
 
-                                                _gaq.push(['_trackPageview', '/user/create-account/email-failed']);
-                                                console.log('/user/create-account/email-failed');
+                                                _gaq.push(["_trackPageview", "/user/create-account/email-failed"]);
+                                                console.log('_gaq.push(["_trackPageview", "/user/create-account/email-failed"]);');
 
                                                 alert(respSendEmail.failureMsg);
 
@@ -242,8 +243,8 @@
                                         });
                                     } else {
 
-                                        _gaq.push(['_trackPageview', '/user/create-account/submit-failed']);
-                                        console.log('/user/create-account/submit-failed');
+                                        _gaq.push(["_trackPageview", "/user/create-account/submit-failed"]);
+                                        console.log('_gaq.push(["_trackPageview", "/user/create-account/submit-failed"]);');
 
                                         alert(respCreateAccount.failureMsg);
                                     }
@@ -256,8 +257,8 @@
                         },
                         Cancel: function() {
 
-                            _gaq.push(['_trackPageview', '/user/create-account/cancel']);
-                            console.log('/user/create-account/cancel');
+                            _gaq.push(["_trackPageview", "/user/create-account/cancel"]);
+                            console.log('_gaq.push(["_trackPageview", "/user/create-account/cancel"]);');
 
                             $(this).dialog("close");
 
@@ -276,7 +277,7 @@
                     position: {my: "top", at: "top", of: $("#description")},
                     buttons: {
                         "Login": function() {
-
+                            
                             var bValid = true;
                             allFields.removeClass("ui-state-error");
 
@@ -289,8 +290,8 @@
 
                             if (bValid) {
 
-                                _gaq.push(['_trackPageview', '/user/login/submit']);
-                                console.log('/user/login/submit');
+                                _gaq.push(["_trackPageview", "/user/login/submit"]);
+                                console.log('_gaq.push(["_trackPageview", "/user/login/submit"]);');
 
                                 $.ajax({
                                     url: 'ajax/loginAccount.php',
@@ -305,17 +306,17 @@
                                     accountInfo.account = resp.username;
                                     if (resp.success) {
 
-                                        _gaq.push(['_trackPageview', '/user/login/success']);
-                                        console.log('/user/login/success');
+                                        _gaq.push(["_trackPageview", "/user/login/success"]);
+                                        console.log('_gaq.push(["_trackPageview", "/user/login/success"]);');
 
                                         alert("Congratulations!  You are logged in with username: " + resp.username);
                                     } else {
                                         if (resp.verified) {
-                                            _gaq.push(['_trackPageview', '/user/login/fail']);
-                                            console.log('/user/login/fail');
+                                            _gaq.push(["_trackPageview", "/user/login/fail"]);
+                                            console.log('_gaq.push(["_trackPageview", "/user/login/fail"]);');
                                         } else {
-                                            _gaq.push(['_trackPageview', '/user/login/account-not-verified']);
-                                            console.log('/user/login/account-not-verified');
+                                            _gaq.push(["_trackPageview", "/user/login/account-not-verified"]);
+                                            console.log('_gaq.push(["_trackPageview", "/user/login/account-not-verified"]);');
                                         }
 
                                         alert("Bummer, login failed. " + resp.failureMsg);
@@ -329,8 +330,8 @@
                         },
                         Cancel: function() {
 
-                            _gaq.push(['_trackPageview', '/user/login/cancel']);
-                            console.log('/user/login/cancel');
+                            _gaq.push(["_trackPageview", "/user/login/cancel"]);
+                            console.log('_gaq.push(["_trackPageview", "/user/login/cancel"]);');
 
                             $(this).dialog("close");
                         }
@@ -349,8 +350,8 @@
                     buttons: {
                         "Verify account": function() {
 
-                            _gaq.push(['_trackPageview', '/user/create-account/verify/submit']);
-                            console.log('/user/create-account/verify/submit');
+                            _gaq.push(["_trackPageview", "/user/create-account/verify/submit"]);
+                            console.log('_gaq.push(["_trackPageview", "/user/create-account/verify/submit"]);');
 
                             verificationInput = $("#verificationInput").val();
                             // check verification code in database
@@ -366,15 +367,15 @@
                             }).done(function(resp) {
                                 if (resp.success) {
 
-                                    _gaq.push(['_trackPageview', '/user/create-account/success']);
-                                    console.log('/user/create-account/success');
+                                    _gaq.push(["_trackPageview", "/user/create-account/success"]);
+                                    console.log('_gaq.push(["_trackPageview", "/user/create-account/success"]);');
 
                                     alert("Congrats!  You have verified your account.");
 
                                 } else {
 
-                                    _gaq.push(['_trackPageview', '/user/create-account/verify/failed']);
-                                    console.log('/user/create-account/verify/failed');
+                                    _gaq.push(["_trackPageview", "/user/create-account/verify/failed"]);
+                                    console.log('_gaq.push(["_trackPageview", "/user/create-account/verify/failed"]);');
 
                                     alert("Bummer. " + resp.failureMsg);
                                 }
@@ -386,8 +387,8 @@
                         },
                         Cancel: function() {
 
-                            _gaq.push(['_trackPageview', '/user/create-account/verify/canceled']);
-                            console.log('/user/create-account/verify/canceled');
+                            _gaq.push(["_trackPageview", "/user/create-account/verify/canceled"]);
+                            console.log('_gaq.push(["_trackPageview", "/user/create-account/verify/canceled"]);');
 
                             $(this).dialog("close");
 
@@ -402,8 +403,8 @@
                         .click(function() {
                     $("#create-account-dialog").dialog("open");
 
-                    _gaq.push(['_trackPageview', '/user/create-account/open']);
-                    console.log('/user/create-account/open');
+                    _gaq.push(["_trackPageview", "/user/create-account/open"]);
+                    console.log('_gaq.push(["_trackPageview", "/user/create-account/open"]);');
 
                 });
 
@@ -411,8 +412,8 @@
                         .click(function() {
                     $("#login-account-dialog").dialog("open");
 
-                    _gaq.push(['_trackPageview', '/user/login/open']);
-                    console.log('/user/login/open');
+                    _gaq.push(["_trackPageview", "/user/login/open"]);
+                    console.log('_gaq.push(["_trackPageview", "/user/login/open"]);');
 
                 });
             });
