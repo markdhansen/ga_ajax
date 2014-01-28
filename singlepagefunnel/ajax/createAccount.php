@@ -45,7 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmtEmail->store_result();
                 if ($stmtEmail->num_rows > 0) {
                     $failureMsg = "Email already exists: " . $_POST['email'];
+                    $stmtEmail->close();
                 } else {
+                    $stmtEmail->close();
                     // insert new account
                     $sqlInsert = "INSERT INTO singlepagefunnel VALUES (?, ?, ?, ?)";
                     $stmtInsert = $conn->prepare($sqlInsert);
