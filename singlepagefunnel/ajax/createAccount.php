@@ -30,11 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             // check if username already exists
             $sqlUsername = "SELECT * FROM singlepagefunnel WHERE username = ?";
-            $stmt = $conn->prepare($sqlUsername);
-            $stmt->bind_param('s', $_POST['username']);
-            $stmt->execute();
-            $stmt->store_result();
-            if ($stmt->num_rows > 0) {
+            $stmtUsername = $conn->prepare($sqlUsername);
+            $stmtUsername->bind_param('s', $_POST['username']);
+            $stmtUsername->execute();
+            $stmtUsername->store_result();
+            if ($stmtUsername->num_rows > 0) {
                 $failureMsg = "Username already exists: " . $_POST['username'];
             } else {
                 // check if email already exists
@@ -49,14 +49,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // insert new account
                     $sqlInsert = "INSERT INTO singlepagefunnel VALUES (?, ?, ?, ?)";
                     $stmtInsert = $conn->prepare($sqlInsert);
-                    // generate random 5 character verification code
-                    $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-                    $verificationcode = '';
-                    for ($i = 0; $i < 5; $i++) {
-                        $verificationcode .= $characters[rand(0, strlen($characters) - 1)];
+                    if ($stmtInsert) {
+                        // generate random 5 character verification code
+                        $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                        $verificationcode = '';
+                        for ($i = 0; $i < 5; $i++) {
+                            $verificationcode .= $characters[rand(0, strlen($characters) - 1)];
+                        }
+                        $stmtInsert->bind_param('ssss', $_POST['username'], $_POST['email'], $_POST['password'], $verificationcode);
+                        $success = $stmtInsert->execute();
+                    } else {
+                        error_log("SQL failed to execute: " . $stmtInsert->error);
                     }
-                    $stmtInsert->bind_param('ssss', $_POST['username'], $_POST['email'], $_POST['password'], $verificationcode);
-                    $success = $stmtInsert->execute();
                 }
             }
             mysqli_close($conn);
