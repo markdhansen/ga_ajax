@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmtSetVerified = $conn->prepare($sqlSetVerified);
                     if (!$conn->error) {
                         $stmtSetVerified->bind_param('ss', $_POST['username'], $_POST['email']);
-                        $stmt->execute();
+                        $stmtSetVerified->execute();
                     } else {
                         error_log("SQL error: " . $conn->error);
                         $failureMsg = $conn->error;
