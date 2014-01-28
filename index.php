@@ -50,7 +50,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/gaexamples">GA Examples</a>
+                    <?php
+                    $errorLog = ini_get('error_log');
+                    $isMamp = false;
+                    if (strpos($errorLog, 'MAMP') !== false) {
+                        $isMamp = true;
+                    }
+                    $home = ($isMamp ? "/gaexamples" : "/");
+                    ?>
+                    <a class="navbar-brand" href="<?php echo $home; ?>">GA Examples</a>
                 </div>
             </div>
         </div>

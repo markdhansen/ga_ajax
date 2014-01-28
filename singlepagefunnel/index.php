@@ -78,15 +78,6 @@
             </form>
         </div>      
 
-        <?php
-        $errorLog = ini_get('error_log');
-        $isMamp = false;
-        if (strpos($errorLog, 'MAMP') !== false) {
-            $isMamp = true;
-        }
-        $home = ($isMamp ? "/gaexamples" : "/");
-        ?>
-        
         <!-- Fixed navbar -->
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
@@ -97,7 +88,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    
+
+                    <?php
+                    $errorLog = ini_get('error_log');
+                    $isMamp = false;
+                    if (strpos($errorLog, 'MAMP') !== false) {
+                        $isMamp = true;
+                    }
+                    $home = ($isMamp ? "/gaexamples" : "/");
+                    ?>
                     <a class="navbar-brand" href="<?php echo $home; ?>">GA Examples</a>
                 </div>
                 <div class="navbar-collapse collapse">
