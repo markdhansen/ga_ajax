@@ -54,5 +54,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-echo json_encode(array('success' => $success, 'failureMsg' => $conn->error));
+echo json_encode(array('success' => $success, 'failureMsg' => $failureMsg));
 ?>

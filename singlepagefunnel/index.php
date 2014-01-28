@@ -78,6 +78,15 @@
             </form>
         </div>      
 
+        <?php
+        $errorLog = ini_get('error_log');
+        $isMamp = false;
+        if (strpos($errorLog, 'MAMP') !== false) {
+            $isMamp = true;
+        }
+        $home = ($isMamp ? "/gaexamples" : "/");
+        ?>
+        
         <!-- Fixed navbar -->
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
@@ -88,7 +97,8 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">GA Examples</a>
+                    
+                    <a class="navbar-brand" href="<?php echo $home; ?>">GA Examples</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -195,10 +205,10 @@
                             bValid = bValid && checkRegexp(password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
 
                             if (bValid) {
-                                
-                                                            _gaq.push(["_trackPageview", "/user/create-account/submit"]);
-                            console.log('_gaq.push(["_trackPageview", "/user/create-account/submit"]);');
-                            
+
+                                _gaq.push(["_trackPageview", "/user/create-account/submit"]);
+                                console.log('_gaq.push(["_trackPageview", "/user/create-account/submit"]);');
+
                                 $.ajax({
                                     url: 'ajax/createAccount.php',
                                     type: "POST",
@@ -277,7 +287,7 @@
                     position: {my: "top", at: "top", of: $("#description")},
                     buttons: {
                         "Login": function() {
-                            
+
                             var bValid = true;
                             allFields.removeClass("ui-state-error");
 
