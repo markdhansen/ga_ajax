@@ -42,7 +42,7 @@
         <!-- create account form -->
         <div id="create-account-dialog" class="signup-modal" title="Create new account">
             <p class="validateTips">All form fields are required.</p>
-            <form>
+            <form autocomplete="off">
                 <fieldset>
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username" class="text ui-widget-content ui-corner-all">
@@ -57,7 +57,7 @@
         <!-- login account form -->
         <div id="login-account-dialog" class="signup-modal" title="Login to your account">
             <p class="validateTips">All form fields are required.</p>
-            <form>
+            <form autocomplete="off">
                 <fieldset>
                     <label for="email">Email</label>
                     <input type="text" name="email" id="login-email" value="" class="text ui-widget-content ui-corner-all">
@@ -70,7 +70,7 @@
         <!-- verify account form -->
         <div id="verify-account-dialog" class="signup-modal" title="Verify account">
             <p class="validateTips">All form fields are required.</p>
-            <form>
+            <form autocomplete="off">
                 <fieldset>
                     <label for="verificationInput">Verification code</label>
                     <input type="text" name="verificationInput" id="verificationInput" class="text ui-widget-content ui-corner-all">
