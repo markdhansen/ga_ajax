@@ -31,6 +31,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($stmt->fetch()) {
                 if ($verificationCodeInDb == $_POST['verificationcode']) {
                     $success = true;
+                    $stmt->close();
+                    $sqlSetVerified = "UPDATE singlepagefunnel SET verified = 1 WHERE username = ? AND email = ?";
+                    $stmtSetVerified = $conn->prepare($sqlSetVerified);
+                    if (!$conn->error) {
+                        $stmtSetVerified->bind_param('ss', $_POST['username'], $_POST['email']);
+                        $stmt->execute();
+                    } else {
+                        error_log("SQL error: " . $conn->error);
+                        $failureMsg = $conn->error;
+                    }
+                    $stmtSetVerified->close();
                 } else if (empty($verificationCodeInDb)) {
                     $failureMsg = "No verification code found for username: " . $_POST['username'] . "; email: " . $_POST['email'];
                 } else {
@@ -43,5 +54,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-echo json_encode(array('success' => $success, 'failureMsg' => $failureMsg));
+echo json_encode(array('success' => $success, 'failureMsg' => $conn->error));
 ?>
