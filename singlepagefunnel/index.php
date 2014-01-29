@@ -11,6 +11,7 @@
 
         <!-- Bootstrap core CSS -->
         <link href="../css/bootstrap.css" rel="stylesheet">
+        <link href="../bootstrap-tour.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
         <link href="../css/navbar-fixed-top.css" rel="stylesheet">
@@ -101,8 +102,8 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="javascript:void(0)" id="login-menu-item">Login</a></li>
-                        <li><a href="javascript:void(0)" id="create-account-menu-item">Create Account</a></li>
+                        <li id="login-menu-item"><a href="javascript:void(0)">Login</a></li>
+                        <li id="create-account-menu-item"><a href="javascript:void(0)">Create Account</a></li>
                     </ul>
                 </div>
             </div>
@@ -117,8 +118,28 @@
                 <p>This example illustrates how to use Google Analytics virtual pageviews to create a funnel that tracks
                     conversion success for a multi-step account creation process.</p>
                 <p>
-                    <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View source &raquo;</a>
+                    <a id="take-tour" class="btn btn-lg btn-primary" href="javascript:void(0)" role="button">Take a tour &raquo;</a>
                 </p>
+                <p>
+                    <a class="btn btn-lg btn-primary" href="javascript:void(0)" role="button">View source &raquo;</a>
+                </p>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Code</h3>
+                </div>
+                <div class="panel-body" id="code-window">
+                    Panel content<br>
+                    more panel content<br>
+                    more panel content<br>
+                    more panel content<br>
+                    more panel content<br>
+                    more panel content<br>
+                    more panel content<br>
+                    more panel content<br>
+                    more panel content<br>
+                    more panel content<br>
+                </div>
             </div>
 
         </div> <!-- /container -->
@@ -126,12 +147,43 @@
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-<!--        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>-->
+        <!--<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>-->
         <script src="//code.jquery.com/jquery-1.9.1.js"></script>
         <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script src="../js/bootstrap.js"></script>
+        <script src="../js/bootstrap-tour.js"></script>
         <script>
             $(function() {
+
+                //var tour = new Tour();
+
+                var tour = new Tour({
+                    backdrop: true,
+                    onShown: function() {
+                        var stepId = this.id;
+                        $("#" + stepId).css("z-index", "1500");
+                    }
+                });
+                
+                
+                
+                var thisline = new Error().lineNumber;
+                $("#code-window").html("line number: " + thisline);
+
+                tour.addSteps([
+                    {
+                        element: "#create-account-menu-item", // string (jQuery selector) - html element next to which the step popover should be shown
+                        title: "Create a new account.", // string - title of the popover
+                        content: "Click here to create an account.  The steps in the account creation process are tracked in the <a href='img/account-creation-funnel.jpg' target='_blank'>Account Creation funnel</a>." // string - content of the popover
+                    },
+                    {
+                        element: "#login-menu-item",
+                        title: "Login to an existing account.",
+                        content: "Click here to login to an account that you have already created.  The steps in the login process are tracked in the <a href='img/account-creation-funnel.jpg' target='_blank'>Login funnel</a>."
+                    }
+                ]);
+                tour.init();
+                //tour.start();
 
                 $(".navbar-nav li").hover(
                         function() {
@@ -273,7 +325,12 @@
 
                         }
                     },
-                    close: function() {
+                    close: function(event, ui) {
+                        if (event.originalEvent) {
+                            // track the close only if initiated by user
+                            _gaq.push(["_trackPageview", "/user/create-account/close"]);
+                            console.log('_gaq.push(["_trackPageview", "/user/create-account/close"]);');
+                        }
                         allFields.val("").removeClass("ui-state-error");
                     }
                 });
@@ -345,7 +402,12 @@
                             $(this).dialog("close");
                         }
                     },
-                    close: function() {
+                    close: function(event, ui) {
+                        if (event.originalEvent) {
+                            // track the close only if initiated by user
+                            _gaq.push(["_trackPageview", "/user/login/close"]);
+                            console.log('_gaq.push(["_trackPageview", "/user/login/close"]);');
+                        }
                         allFields.val("").removeClass("ui-state-error");
                     }
                 });
@@ -403,7 +465,12 @@
 
                         }
                     },
-                    close: function() {
+                    close: function(event, ui) {
+                        if (event.originalEvent) {
+                            // track the close only if initiated by user
+                            _gaq.push(["_trackPageview", "/user/create-account/verify/close"]);
+                            console.log('_gaq.push(["_trackPageview", "/user/create-account/verify/close"]);');
+                        }
                         allFields.val("").removeClass("ui-state-error");
                     }
                 });
@@ -425,6 +492,12 @@
                     console.log('_gaq.push(["_trackPageview", "/user/login/open"]);');
 
                 });
+
+                $("#take-tour")
+                        .click(function() {
+                    tour.restart();
+                });
+
             });
         </script>
     </body>
