@@ -30,27 +30,14 @@ function showCode(symbol) {
             codeSegment += "<div id='_scTopLine'></div>\n";
             nextGaqPushIsYellow = true;
         }
-//        if (codeArr[i].indexOf("showCode(\"") == -1) {
-//            if (codeArr[i].indexOf("_gaq.push") == -1) {
-//                if (!nextLineIsTop) {
-//                    codeSegment += codeArr[i] + "\n";
-//                } else {
-//                    codeSegment += "<div id='_scTopLine'>" + codeArr[i] + "</div>";
-//                    nextLineIsTop = false;
-//                }
-//            } else {
-//                if (!nextLineIsTop) {
-//                    codeSegment += "<div style='background-color:yellow;'>" + codeArr[i] + "</div>";
-//                } else {
-//                    codeSegment += "<div id='_scTopLine' style='background-color:yellow;'>" + codeArr[i] + "</div>";
-//                }
-//            }
-//        } else {
-//            nextLineIsTop = true;
-//        }
     }
     $("#code-window").html(codeSegment);
-    $("#_scTopLine")[0].scrollIntoView();
+    var codeWindowHeight = $("#code-window")[0].offsetHeight;
+    var codeTextHeight = $("#code-window")[0].scrollHeight;
+    var codeTop = Math.round((codeTextHeight - codeWindowHeight)/2);
+    $("#code-window").scrollTop(codeTop);
+    alert("codeTextHeight = " + codeTextHeight + ";  codeWindowHeight = " + codeWindowHeight + ";  codeTop = " + codeTop)
+    //$("#_scTopLine")[0].scrollIntoView();
 
 }
 

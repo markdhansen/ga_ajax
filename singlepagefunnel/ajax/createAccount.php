@@ -58,7 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         for ($i = 0; $i < 5; $i++) {
                             $verificationcode .= $characters[rand(0, strlen($characters) - 1)];
                         }
-                        $stmtInsert->bind_param('ssss', $_POST['username'], $_POST['email'], $_POST['password'], $verificationcode);
+                        $hashedPassword = hash('sha512', $_POST['password']);
+                        $stmtInsert->bind_param('ssss', $_POST['username'], $_POST['email'], $hashedPassword, $verificationcode);
                         $success = $stmtInsert->execute();
                     } else {
                         error_log("SQL failed to execute: " . $conn->error);

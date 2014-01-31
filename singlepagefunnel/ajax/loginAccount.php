@@ -27,13 +27,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $conn->prepare($sqlPassword);
             $stmt->bind_param('s', $_POST['email']);
             $stmt->execute();
-            $stmt->bind_result($passwordInDb, $username, $verified);
+            $stmt->bind_result($hashedPasswordInDb, $username, $verified);
+            $hashedPassword = hash('sha512', $_POST['password']);
             if ($stmt->fetch()) {
-                if ($passwordInDb == $_POST['password'] && $verified) {
+                if ($hashedPassword == $hashedPasswordInDb && $verified) {
                     $success = true;
                 } else if (!$verified) {
                     $failureMsg = "Account is not verified.";
-                } else if (empty($passwordInDb)) {
+                } else if (empty($hashedPasswordInDb)) {
                     $failureMsg = "No password found for email: " . $_POST['email'];
                 } else {
                     $failureMsg = "Wrong password.";
