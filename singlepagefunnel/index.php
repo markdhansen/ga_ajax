@@ -37,7 +37,13 @@
             .validateTips { border: 1px solid transparent; padding: 0.3em; }
             .scroller-area {
                 max-height: 200px;
-                overflow-y:scroll; 
+                overflow-y:scroll;                
+            }
+            .panel-body-wrapper {
+                overflow-x: scroll;
+            }
+            .wide {
+                width:4000px;
             }
 
         </style>
@@ -133,19 +139,24 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Code</h3>
                 </div>
-                <div class="panel-body">
-                    <div>
+                <div class="panel-body-wrapper">
+                    <!--<div class="panel-body">-->
+                    <div class="wide">
                         <pre id="code-window" class="scroller-area"></pre>
                     </div>
+                    <!--</div>-->
                 </div>
             </div>
             <div id="this-file" style="display:none;">
                 <?php
                 $file = file_get_contents('./index.php', FILE_USE_INCLUDE_PATH);
-                $escapedFile = str_replace("&", "&amp;", $file);
-                $escapedFile = str_replace("<", "&lt;", $escapedFile);
-                $escapedFile = str_replace(">", "&gt;", $escapedFile);
-                echo $escapedFile;
+                $escapedFile = str_replace(">", "&gt;", str_replace("<", "&lt;", str_replace("&", "&amp;", $file)));
+                $paddingSize = 200;
+                $padding = "";
+                for ($i = 1; $i <= $paddingSize; $i++) {
+                    $padding .= "\n";
+                }
+                echo $padding . $escapedFile . $padding;
                 ?>
             </div>
 
@@ -160,6 +171,8 @@
         <script src="../js/bootstrap.js"></script>
         <script src="../js/bootstrap-tour.js"></script>
         <script src="../js/showcode.js"></script>
+        <script src="../js/validation.js"></script>
+        <script src="../js/tips.js"></script>
         <script>
             $(function() {
 
@@ -198,38 +211,7 @@
                         password = $("#password"),
                         loginEmail = $("#login-email"),
                         loginPassword = $("#login-password"),
-                        allFields = $([]).add(username).add(email).add(password),
-                        tips = $(".validateTips");
-
-                function updateTips(t) {
-                    tips
-                            .text(t)
-                            .addClass("ui-state-highlight");
-                    setTimeout(function() {
-                        tips.removeClass("ui-state-highlight", 1500);
-                    }, 500);
-                }
-
-                function checkLength(o, n, min, max) {
-                    if (o.val().length > max || o.val().length < min) {
-                        o.addClass("ui-state-error");
-                        updateTips("Length of " + n + " must be between " +
-                                min + " and " + max + ".");
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }
-
-                function checkRegexp(o, regexp, n) {
-                    if (!(regexp.test(o.val()))) {
-                        o.addClass("ui-state-error");
-                        updateTips(n);
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }
+                        allFields = $([]).add(email).add(password).add(username).add(loginEmail).add(loginPassword);
 
                 var accountInfo = {};
 
@@ -242,18 +224,7 @@
                     buttons: {
                         "Create an account": function() {
 
-                            var bValid = true;
-                            allFields.removeClass("ui-state-error");
-
-                            bValid = bValid && checkLength(username, "username", 3, 16);
-                            bValid = bValid && checkLength(email, "email", 6, 80);
-                            bValid = bValid && checkLength(password, "password", 5, 16);
-
-                            bValid = bValid && checkRegexp(username, /^[a-z]([0-9a-z_])+$/i, "Username may consist of a-z, 0-9, underscores, begin with a letter.");
-                            // From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
-                            bValid = bValid && checkRegexp(email, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "eg. ui@jquery.com");
-                            bValid = bValid && checkRegexp(password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
-
+                            var bValid = validateAccount(username, email, password);
                             if (bValid) {
 
                                 showCode("_user_create_account_submit");
@@ -343,16 +314,7 @@
                     buttons: {
                         "Login": function() {
 
-                            var bValid = true;
-                            allFields.removeClass("ui-state-error");
-
-                            bValid = bValid && checkLength(loginEmail, "email", 6, 80);
-                            bValid = bValid && checkLength(loginPassword, "password", 5, 16);
-
-                            // From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
-                            bValid = bValid && checkRegexp(loginEmail, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "eg. ui@jquery.com");
-                            bValid = bValid && checkRegexp(loginPassword, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
-
+                            var bValid = validateLogin(loginEmail, loginPassword);
                             if (bValid) {
 
                                 showCode("_user_login_submit");

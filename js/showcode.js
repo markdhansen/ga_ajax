@@ -6,13 +6,13 @@ function showCode(symbol) {
     var thisShowCodeLineNo = 0;
     for (var i = 0; i < codeArr.length; i++)
     {
-        if (codeArr[i].indexOf(symbol) != -1) {
+        if (codeArr[i].indexOf(symbol) !== -1) {
             thisShowCodeLineNo = i;
             break;
         }
     }
-    var start = Math.max(0, thisShowCodeLineNo - 25);
-    var end = Math.min(codeArr.length, thisShowCodeLineNo + 25);
+    var start = Math.max(0, thisShowCodeLineNo - 100);
+    var end = Math.min(codeArr.length, thisShowCodeLineNo + 100);
     // alert(lineNo + ", " + start + ", " + end);
     // var nextLineIsTop = false;
     var nextGaqPushIsYellow = false;
@@ -32,12 +32,12 @@ function showCode(symbol) {
         }
     }
     $("#code-window").html(codeSegment);
+    
     var codeWindowHeight = $("#code-window")[0].offsetHeight;
     var codeTextHeight = $("#code-window")[0].scrollHeight;
     var codeTop = Math.round((codeTextHeight - codeWindowHeight)/2);
     $("#code-window").scrollTop(codeTop);
-    alert("codeTextHeight = " + codeTextHeight + ";  codeWindowHeight = " + codeWindowHeight + ";  codeTop = " + codeTop)
-    //$("#_scTopLine")[0].scrollIntoView();
+    // alert("codeTextHeight = " + codeTextHeight + ";  codeWindowHeight = " + codeWindowHeight + ";  codeTop = " + codeTop)
 
 }
 
