@@ -11,7 +11,7 @@
 
         <!-- Bootstrap core CSS -->
         <link href="../css/bootstrap.css" rel="stylesheet">
-        <link href="../bootstrap-tour.css" rel="stylesheet">
+        <link href="../css/bootstrap-tour.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
         <link href="../css/navbar-fixed-top.css" rel="stylesheet">
@@ -35,6 +35,11 @@
             .navbar-nav { font-size: 14px; }
             .ui-dialog .ui-state-error { padding: .3em; }
             .validateTips { border: 1px solid transparent; padding: 0.3em; }
+            .scroller-area {
+                max-height: 200px;
+                overflow-y:scroll; 
+            }
+
         </style>
         <?php include_once("../analyticstracking.php") ?>
     </head>
@@ -128,18 +133,20 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Code</h3>
                 </div>
-                <div class="panel-body" id="code-window">
-                    Panel content<br>
-                    more panel content<br>
-                    more panel content<br>
-                    more panel content<br>
-                    more panel content<br>
-                    more panel content<br>
-                    more panel content<br>
-                    more panel content<br>
-                    more panel content<br>
-                    more panel content<br>
+                <div class="panel-body">
+                    <div>
+                        <pre id="code-window" class="scroller-area"></pre>
+                    </div>
                 </div>
+            </div>
+            <div id="this-file" style="display:none;">
+                <?php
+                $file = file_get_contents('./index.php', FILE_USE_INCLUDE_PATH);
+                $escapedFile = str_replace("&", "&amp;", $file);
+                $escapedFile = str_replace("<", "&lt;", $escapedFile);
+                $escapedFile = str_replace(">", "&gt;", $escapedFile);
+                echo $escapedFile;
+                ?>
             </div>
 
         </div> <!-- /container -->
@@ -152,10 +159,9 @@
         <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script src="../js/bootstrap.js"></script>
         <script src="../js/bootstrap-tour.js"></script>
+        <script src="../js/showcode.js"></script>
         <script>
             $(function() {
-
-                //var tour = new Tour();
 
                 var tour = new Tour({
                     backdrop: true,
@@ -164,12 +170,6 @@
                         $("#" + stepId).css("z-index", "1500");
                     }
                 });
-                
-                
-                
-                var thisline = new Error().lineNumber;
-                $("#code-window").html("line number: " + thisline);
-
                 tour.addSteps([
                     {
                         element: "#create-account-menu-item", // string (jQuery selector) - html element next to which the step popover should be shown
@@ -183,7 +183,6 @@
                     }
                 ]);
                 tour.init();
-                //tour.start();
 
                 $(".navbar-nav li").hover(
                         function() {
@@ -257,8 +256,8 @@
 
                             if (bValid) {
 
+                                showCode("_user_create_account_submit");
                                 _gaq.push(["_trackPageview", "/user/create-account/submit"]);
-                                console.log('_gaq.push(["_trackPageview", "/user/create-account/submit"]);');
 
                                 $.ajax({
                                     url: 'ajax/createAccount.php',
@@ -287,13 +286,13 @@
                                             if (respSendEmail.success) {
                                                 $("#verify-account-dialog").dialog("open");
 
+                                                showCode("_user_create_account_verify_open");
                                                 _gaq.push(["_trackPageview", "/user/create-account/verify/open"]);
-                                                console.log('_gaq.push(["_trackPageview", "/user/create-account/verify/open"]);');
 
                                             } else {
 
+                                                showCode("_user_create_account_email-failed");
                                                 _gaq.push(["_trackPageview", "/user/create-account/email-failed"]);
-                                                console.log('_gaq.push(["_trackPageview", "/user/create-account/email-failed"]);');
 
                                                 alert(respSendEmail.failureMsg);
 
@@ -304,8 +303,8 @@
                                         });
                                     } else {
 
+                                        showCode("_user_create_account_submit_failed");
                                         _gaq.push(["_trackPageview", "/user/create-account/submit-failed"]);
-                                        console.log('_gaq.push(["_trackPageview", "/user/create-account/submit-failed"]);');
 
                                         alert(respCreateAccount.failureMsg);
                                     }
@@ -318,8 +317,8 @@
                         },
                         Cancel: function() {
 
+                            showCode("_user_create_account_cancel");
                             _gaq.push(["_trackPageview", "/user/create-account/cancel"]);
-                            console.log('_gaq.push(["_trackPageview", "/user/create-account/cancel"]);');
 
                             $(this).dialog("close");
 
@@ -328,8 +327,8 @@
                     close: function(event, ui) {
                         if (event.originalEvent) {
                             // track the close only if initiated by user
+                            showCode("_user_create_account_close");
                             _gaq.push(["_trackPageview", "/user/create-account/close"]);
-                            console.log('_gaq.push(["_trackPageview", "/user/create-account/close"]);');
                         }
                         allFields.val("").removeClass("ui-state-error");
                     }
@@ -356,8 +355,8 @@
 
                             if (bValid) {
 
+                                showCode("_user_login_submit");
                                 _gaq.push(["_trackPageview", "/user/login/submit"]);
-                                console.log('_gaq.push(["_trackPageview", "/user/login/submit"]);');
 
                                 $.ajax({
                                     url: 'ajax/loginAccount.php',
@@ -372,17 +371,17 @@
                                     accountInfo.account = resp.username;
                                     if (resp.success) {
 
+                                        showCode("_user_login_success");
                                         _gaq.push(["_trackPageview", "/user/login/success"]);
-                                        console.log('_gaq.push(["_trackPageview", "/user/login/success"]);');
 
                                         alert("Congratulations!  You are logged in with username: " + resp.username);
                                     } else {
                                         if (resp.verified) {
+                                            showCode("_user_login_fail");
                                             _gaq.push(["_trackPageview", "/user/login/fail"]);
-                                            console.log('_gaq.push(["_trackPageview", "/user/login/fail"]);');
                                         } else {
+                                            showCode("_user_login_account_not_verified");
                                             _gaq.push(["_trackPageview", "/user/login/account-not-verified"]);
-                                            console.log('_gaq.push(["_trackPageview", "/user/login/account-not-verified"]);');
                                         }
 
                                         alert("Bummer, login failed. " + resp.failureMsg);
@@ -396,8 +395,8 @@
                         },
                         Cancel: function() {
 
+                            showCode("_user_login_cancel");
                             _gaq.push(["_trackPageview", "/user/login/cancel"]);
-                            console.log('_gaq.push(["_trackPageview", "/user/login/cancel"]);');
 
                             $(this).dialog("close");
                         }
@@ -405,8 +404,8 @@
                     close: function(event, ui) {
                         if (event.originalEvent) {
                             // track the close only if initiated by user
+                            showCode("_user_login_close");
                             _gaq.push(["_trackPageview", "/user/login/close"]);
-                            console.log('_gaq.push(["_trackPageview", "/user/login/close"]);');
                         }
                         allFields.val("").removeClass("ui-state-error");
                     }
@@ -421,8 +420,8 @@
                     buttons: {
                         "Verify account": function() {
 
+                            showCode("_user_create_account_verify_submit");
                             _gaq.push(["_trackPageview", "/user/create-account/verify/submit"]);
-                            console.log('_gaq.push(["_trackPageview", "/user/create-account/verify/submit"]);');
 
                             verificationInput = $("#verificationInput").val();
                             // check verification code in database
@@ -438,15 +437,14 @@
                             }).done(function(resp) {
                                 if (resp.success) {
 
+                                    showCode("_user_create_account_success");
                                     _gaq.push(["_trackPageview", "/user/create-account/success"]);
-                                    console.log('_gaq.push(["_trackPageview", "/user/create-account/success"]);');
 
                                     alert("Congrats!  You have verified your account.");
 
                                 } else {
-
+                                    showCode("_user_create_account_verify_failed");
                                     _gaq.push(["_trackPageview", "/user/create-account/verify/failed"]);
-                                    console.log('_gaq.push(["_trackPageview", "/user/create-account/verify/failed"]);');
 
                                     alert("Bummer. " + resp.failureMsg);
                                 }
@@ -458,8 +456,8 @@
                         },
                         Cancel: function() {
 
+                            showCode("_user_create_account_verify_canceled");
                             _gaq.push(["_trackPageview", "/user/create-account/verify/canceled"]);
-                            console.log('_gaq.push(["_trackPageview", "/user/create-account/verify/canceled"]);');
 
                             $(this).dialog("close");
 
@@ -468,8 +466,8 @@
                     close: function(event, ui) {
                         if (event.originalEvent) {
                             // track the close only if initiated by user
+                            showCode("_user_create_account_verify_close");
                             _gaq.push(["_trackPageview", "/user/create-account/verify/close"]);
-                            console.log('_gaq.push(["_trackPageview", "/user/create-account/verify/close"]);');
                         }
                         allFields.val("").removeClass("ui-state-error");
                     }
@@ -479,8 +477,8 @@
                         .click(function() {
                     $("#create-account-dialog").dialog("open");
 
+                    showCode("_user_create_account_open");
                     _gaq.push(["_trackPageview", "/user/create-account/open"]);
-                    console.log('_gaq.push(["_trackPageview", "/user/create-account/open"]);');
 
                 });
 
@@ -488,8 +486,8 @@
                         .click(function() {
                     $("#login-account-dialog").dialog("open");
 
+                    showCode("_user_login_open");
                     _gaq.push(["_trackPageview", "/user/login/open"]);
-                    console.log('_gaq.push(["_trackPageview", "/user/login/open"]);');
 
                 });
 
