@@ -1,0 +1,128 @@
+body {
+padding-bottom:0 !important;
+background:#4e004e url(sprite.png) -10px -15px;
+}
+
+h1 {color: #4e004e}
+.highlight {background:yellow}
+.listings {padding:30px}
+
+.btn.up a {text-decoration:none}
+a.btn.btn-inverse{color: #c000c0
+}
+a.btn.btn-inverse:hover {color:#fff}
+
+button.btn.btn-default.btn-block {
+	margin-bottom:10px !important;
+	border:1px solid rgba(255,255,255,.9);
+}
+
+.desc {
+	padding:10px 25px;
+	background: rgba(255,255,255,.9);
+	margin-bottom:10px;
+	border-radius:5px;	
+	margin-bottom:30px;
+}
+
+.desc  hr {
+	margin:10px 0;	
+	background: rgba(255,255,255,.9);
+	border-bottom: rgba(255,255,255,.9);
+}
+
+.logo a {
+	padding:10px;
+	display:block;
+	font-size:1.2em;
+	color:#fff;
+	text-transform:uppercase;
+	text-shadow: rgba(255,255,255,.9);
+	font-weight:bold;
+	text-decoration:none	
+}
+
+.loginbox {padding-top:5px}
+
+.form-group.has-success.has-feedback {
+	background: rgba(255,255,255,.9);
+	padding:10px;
+	border-radius:5px;
+	border:1px solid rgba(255,255,255,.9);	
+}
+
+#inputSuccess3 {margin-bottom:5px}
+
+hr {
+	border-top: 1px solid #5c1a74;
+	border-bottom: 1px solid #9426ba;
+}
+
+h3 {
+	color:#fff;
+	opacity:.4;
+	font-size:1.5em;
+}
+
+.right {text-align:right}
+
+.help-icons {
+	height:64px;
+	width:64px;
+	margin:auto;
+}
+
+.outbound-links {
+	background: url(img/sprite.png) -10px -10px;
+	background-size:200px;
+	height:64px;
+	width:64px;
+	margin:auto;
+}
+
+.single-funnel {
+  	background: url(img/sprite.png) -81px -20px;
+  	background-size:200px;
+	height:64px;
+	width:64px;
+	margin:auto;
+}
+
+.main-listing {
+	background:#fff;
+	padding:20px 60px;
+	margin-bottom:20px;
+	border-radius:5px;
+	border:1px solid rgba(255,255,255,.9);	
+	box-shadow: 0 1px 6px rgba(0,0,0,.4);	
+}
+
+.main-listing .help-icons {
+	height:64px;
+	width:64px;
+	margin:0;
+	float:left;	
+}
+
+.results {color:#fff;margin-bottom:20px;opacity: .4;
+}
+
+
+@media (min-width: 768px) and (max-width: 979px) {
+.topnav {text-align:center;padding-bottom:20px !important;}
+.right {text-align:right !important}
+}
+
+@media (max-width: 767px) {
+.topnav {text-align:center;padding-bottom:20px !important;}
+.right {text-align:center !important}
+h1 {font-size:1.2em}
+}
+
+@media (max-width: 480px) {
+.topnav {text-align:center;padding-bottom:20px !important;}
+.right {text-align:center !important}
+h1 {font-size:1.2em}
+
+}
+
