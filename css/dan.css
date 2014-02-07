@@ -1,0 +1,114 @@
+.center, .centre {
+    text-align:center;	
+}
+body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing:antialiased;
+}
+
+/* Colors */
+
+.white{color:#ffffff}
+.purple{color:#7e1e9c}
+.green{color:#15b01a}
+.blue{color:#0343df}
+.pink{color:#ff81c0}
+.brown{color:#653700}
+.red{color:#e50000}
+.lightblue{color:#95d0fc}
+.teal{color:#029386}
+.orange{color:#f97306}
+.lightgreen{color:#96f97b} 
+.magenta{color:#c20078}
+.yellow {color:#ffff14}
+.skyblue{color:#75bbfd}
+.grey{color:#929591}
+.limegreen{color:#89fe05} 
+.lightpurple{color:#bf77f6}
+.violet{color:#9a0eea}
+.darkgreen{color:#033500}
+.turquoise{color:#06c2ac}
+.lavender{color:#c79fef}
+.darkblue{color:#00035b}
+.tan{color:#d1b26f}
+.cyan{color:#00ffff}
+.aqua{color:#13eac9}
+.forest green{color:#06470c}
+.mauve{color:#ae7181}
+.darkpurple{color:#35063e}
+.brightgreen{color:#01ff07}
+.maroon{color:#650021}
+.olive{color:#6e750e}
+.salmon{color:#ff796c}
+.beige{color:#e6daa6}
+.royalblue{color:#0504aa}
+.navyblue{color:#001146}
+.lilac{color:#cea2fd}
+.black{color:#000000}
+.hotpink{color:#ff028d}
+.lightbrown{color:#ad8150}
+.palegreen{color:#c7fdb5}
+.peach{color:#ffb07c}
+.olivegreen{color:#677a04}
+.darkpink{color:#cb416b}
+
+
+/* Backgrounds */
+.whitebg{background:#ffffff}
+.purplebg{background:#7e1e9c}
+.greenbg{background:#15b01a}
+.bluebg{background:#0343df}
+.pinkbg{background:#ff81c0}
+.brownbg{background:#653700}
+.redbg{background:#e50000}
+.lightbluebg{background:#95d0fc}
+.tealbg{background:#029386}
+.orangebg{background:#f97306}
+.lightgreenbg{background:#96f97b} 
+.magentabg{background:#c20078}
+.yellow bg{background:#ffff14}
+.skybluebg{background:#75bbfd}
+.greybg{background:#929591}
+.limegreenbg{background:#89fe05} 
+.lightpurplebg{background:#bf77f6}
+.violetbg{background:#9a0eea}
+.darkgreenbg{background:#033500}
+.turquoisebg{background:#06c2ac}
+.lavenderbg{background:#c79fef}
+.darkbluebg{background:#00035b}
+.tanbg{background:#d1b26f}
+.cyanbg{background:#00ffff}
+.aquabg{background:#13eac9}
+.forest greenbg{background:#06470c}
+.mauvebg{background:#ae7181}
+.darkpurplebg{background:#35063e}
+.brightgreenbg{background:#01ff07}
+.maroonbg{background:#650021}
+.olivebg{background:#6e750e}
+.salmonbg{background:#ff796c}
+.beigebg{background:#e6daa6}
+.royalbluebg{background:#0504aa}
+.navybluebg{background:#001146}
+.lilacbg{background:#cea2fd}
+.blackbg{background:#000000}
+.hotpinkbg{background:#ff028d}
+.lightbrownbg{background:#ad8150}
+.palegreenbg{background:#c7fdb5}
+.peachbg{background:#ffb07c}
+.olivegreenbg{background:#677a04}
+.darkpinkbg{background:#cb416b}
+
+
+.flex-video.widescreen { padding-bottom: 57.25%; }
+.flex-video.vimeo { padding-top: 0; }
+
+.flex-video iframe,
+.flex-video object,
+.flex-video embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+

@@ -9,28 +9,19 @@
 
         <title>Single Page Funnel</title>
 
-        <!-- Bootstrap core CSS -->
-        <link href="../css/bootstrap.css" rel="stylesheet">
-        <link href="../css/bootstrap-tour.css" rel="stylesheet">
-
-        <!-- Custom styles for this template -->
-        <link href="../css/navbar-fixed-top.css" rel="stylesheet">
-
-        <!-- Just for debugging purposes. Don't actually copy this line! -->
-        <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.css" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-tour.css" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/style.css" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/dan.css" />
         <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 
         <style>
             body { font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif"; font-size: 11px; }
             label, input { display:block; }
-            input.text { margin-bottom:12px; width:95%; padding: .4em; }
-            fieldset { padding:0; border:0; margin-top:25px; }
+            input.text { margin-bottom:2px; width:95%; padding: .1em; }
+            fieldset { font-size:0.85em; padding:0; border:0; margin-top:2px; }
             h1 { font-size: 1.2em; margin: .6em 0; }
             .navbar-nav { font-size: 14px; }
             .ui-dialog .ui-state-error { padding: .3em; }
@@ -50,6 +41,86 @@
         <?php include_once("../analyticstracking.php") ?>
     </head>
     <body>
+
+        <?php
+        $errorLog = ini_get('error_log');
+        $isMamp = false;
+        if (strpos($errorLog, 'MAMP') !== false) {
+            $isMamp = true;
+        }
+        $home = ($isMamp ? "/gaexamples" : "/");
+        ?>
+        <div class="topnav">
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <div class="logo">
+                        <a href="<?php echo $home; ?>">GAExamples</a>
+                    </div></div>
+                <div class="col-md-8 col-sm-8 right"> 
+                    <div class="loginbox">
+                        <a href="#" class="btn btn-inverse">Signup</a>
+                        <a href="#" class="btn btn-inverse">Login</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row purplebg listings">
+            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                <a href="<?php echo $home; ?>" class="btn btn-default"><i class="fa fa-caret-left"></i> Back to  examples </a>
+                <hr />
+                <div id="example" class="row">
+                    <div class="col-md-12">
+                        <div class="main-listing">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="help-icons single-funnel"></div>
+                                    <h1>Single page funnel</h1> 
+                                </div>
+                                <div class="col-md-3 right">
+                                    <a href="#"><i class="fa fa-star orange"></i> Favorited</a>
+                                </div>
+                            </div>
+
+                            <p>
+                                This example illustrates how to use Google Analytics virtual pageviews to create a funnel that tracks conversion success for a multi-step account creation process. </p>
+
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu turpis eu magna interdum mollis nec sollicitudin arcu. Integer vitae odio suscipit, sagittis felis id, auctor libero. Nullam malesuada augue non ipsum facilisis pulvinar. Sed gravida commodo metus, id varius dui lobortis vitae. Ut et massa massa. 
+                            </p>
+                            <p>
+                                <a id="create-account-button" class="btn btn-lg btn-primary" href="javascript:void(0)" role="button">Run example &raquo;</a>
+                            </p>
+                            <h3 class="code-header">Code example</h3>
+                            <div class="panel-body-wrapper">
+                                <!--<div class="panel-body">-->
+                                <div class="wide">
+                                    <pre id="code-window" class="scroller-area"></pre>
+                                </div>
+                                <!--</div>-->
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-----end row----->
+
+
+                <hr />
+
+
+
+
+
+            </div>
+        </div>
+
+        <!--  worker code below -->
 
         <!-- create account form -->
         <div id="create-account-dialog" class="signup-modal" title="Create new account">
@@ -217,10 +288,10 @@
 
                 $("#create-account-dialog").dialog({
                     autoOpen: false,
-                    height: 350,
-                    width: 300,
+                    height: 265,
+                    width: 350,
                     modal: true,
-                    position: {my: "top", at: "top", of: $("#description")},
+                    position: {my: "right-20 top+5", at: "right top", of: $("#example")},
                     buttons: {
                         "Create an account": function() {
 
@@ -307,7 +378,7 @@
 
                 $("#login-account-dialog").dialog({
                     autoOpen: false,
-                    height: 275,
+                    height: 300,
                     width: 300,
                     modal: true,
                     position: {my: "top", at: "top", of: $("#description")},
@@ -435,7 +506,16 @@
                     }
                 });
 
-                $("#create-account-menu-item")
+//                $("#create-account-menu-item")
+//                        .click(function() {
+//                    $("#create-account-dialog").dialog("open");
+//
+//                    showCode("_user_create_account_open");
+//                    _gaq.push(["_trackPageview", "/user/create-account/open"]);
+//
+//                });
+
+                $("#create-account-button")
                         .click(function() {
                     $("#create-account-dialog").dialog("open");
 
