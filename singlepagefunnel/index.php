@@ -37,6 +37,16 @@
             .wide {
                 width:4000px;
             }
+            #run-ui {
+                padding-right: 0px;
+                padding-left: 0px;
+            }
+            #run-ui-navbar {
+                border-radius: 0px;
+            }
+            #run-ui-container {
+                padding: 5px;
+            }
 
         </style>
         <?php include_once("../analyticstracking.php") ?>
@@ -66,7 +76,6 @@
             </div>
         </div>
 
-
         <div id="container" class="row purplebg listings">
             <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
                 <a href="<?php echo $home; ?>" class="btn btn-default"><i class="fa fa-caret-left"></i> Back to  examples </a>
@@ -83,10 +92,8 @@
                                     <a href="#"><i class="fa fa-star orange"></i> Favorited</a>
                                 </div>
                             </div>
-
                             <p>
                                 This example illustrates how to use Google Analytics virtual pageviews to create a funnel that tracks conversion success for a multi-step account creation process. </p>
-
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu turpis eu magna interdum mollis nec sollicitudin arcu. Integer vitae odio suscipit, sagittis felis id, auctor libero. Nullam malesuada augue non ipsum facilisis pulvinar. Sed gravida commodo metus, id varius dui lobortis vitae. Ut et massa massa. 
                             </p>
@@ -96,27 +103,30 @@
                         </div>
                     </div>
                     <div id="run-ui" class="col-md-12 lightbluebg" style="display:none">
-                        <div class="examplenav">
-                            <div class="row">
-                                <div class="col-md-4 col-sm-4">
-                                    <div class="logo">
-                                        <a href="javascript:void(0)">Single page funnel</a>
-                                    </div></div>
-                                <div class="col-md-8 col-sm-8 right"> 
-                                    <div class="loginbox">
-                                        <a href="#" class="btn btn-inverse">Signup</a>
-                                        <a href="#" class="btn btn-inverse">Login</a>
-                                    </div>
-
+                        <div id="run-ui-navbar" class="navbar navbar-default navbar-static" role="navigation">
+                            <div class="container-fluid">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <a class="navbar-brand" href="javascript:void(0)">Single Page Funnel</a>
+                                </div>
+                                <div class="navbar-collapse collapse">
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li id="login-menu-item"><a href="javascript:void(0)">Signup</a></li>
+                                        <li id="create-account-menu-item"><a href="javascript:void(0)">Login</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <p>
-                            <br>
+                        <div id="run-ui-container">
                             <a id="create-account-button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#create-account-dialog">Create account</a>
-                            <br>
-                        </p>
+                        </div>
                     </div>
+
                     <div id="run-code" class="col-md-12" style="display:none">
                         <h3 class="code-header">Code window</h3>
                         <div class="panel-body-wrapper">
