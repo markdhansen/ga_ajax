@@ -15,6 +15,7 @@
         <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-tour.css" />
         <link rel="stylesheet" type="text/css" media="all" href="../css/style.css" />
         <link rel="stylesheet" type="text/css" media="all" href="../css/dan.css" />
+        <link rel="stylesheet" type="text/css" media="all" href="./css/runexample.css" />
         <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 
         <style>
@@ -61,18 +62,17 @@
                         <a href="#" class="btn btn-inverse">Signup</a>
                         <a href="#" class="btn btn-inverse">Login</a>
                     </div>
-
                 </div>
             </div>
         </div>
 
 
-        <div class="row purplebg listings">
+        <div id="container" class="row purplebg listings">
             <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
                 <a href="<?php echo $home; ?>" class="btn btn-default"><i class="fa fa-caret-left"></i> Back to  examples </a>
                 <hr />
-                <div id="example" class="row">
-                    <div class="col-md-12">
+                <div class="row">
+                    <div id="example" class="col-md-12">
                         <div class="main-listing">
                             <div class="row">
                                 <div class="col-md-9">
@@ -91,54 +91,86 @@
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu turpis eu magna interdum mollis nec sollicitudin arcu. Integer vitae odio suscipit, sagittis felis id, auctor libero. Nullam malesuada augue non ipsum facilisis pulvinar. Sed gravida commodo metus, id varius dui lobortis vitae. Ut et massa massa. 
                             </p>
                             <p>
-                                <a id="create-account-button" class="btn btn-lg btn-primary" href="javascript:void(0)" role="button">Run example &raquo;</a>
+                                <a id="run-example-button" class="btn btn-sm btn-primary">Run example &raquo;</a>
                             </p>
-                            <h3 class="code-header">Code example</h3>
-                            <div class="panel-body-wrapper">
-                                <!--<div class="panel-body">-->
-                                <div class="wide">
-                                    <pre id="code-window" class="scroller-area"></pre>
-                                </div>
-                                <!--</div>-->
-                            </div>
-
                         </div>
                     </div>
+                    <div id="run-ui" class="col-md-12 lightbluebg" style="display:none">
+                        <div class="examplenav">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="logo">
+                                        <a href="javascript:void(0)">Single page funnel</a>
+                                    </div></div>
+                                <div class="col-md-8 col-sm-8 right"> 
+                                    <div class="loginbox">
+                                        <a href="#" class="btn btn-inverse">Signup</a>
+                                        <a href="#" class="btn btn-inverse">Login</a>
+                                    </div>
 
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            <br>
+                            <a id="create-account-button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#create-account-dialog">Create account</a>
+                            <br>
+                        </p>
+                    </div>
+                    <div id="run-code" class="col-md-12" style="display:none">
+                        <h3 class="code-header">Code window</h3>
+                        <div class="panel-body-wrapper">
+                            <!--<div class="panel-body">-->
+                            <div class="wide">
+                                <pre id="code-window" class="scroller-area"></pre>
+                            </div>
+                            <!--</div>-->
+                        </div>                    
+                    </div>
 
                 </div>
-
                 <!-----end row----->
-
-
                 <hr />
-
-
-
-
-
             </div>
         </div>
 
         <!--  worker code below -->
 
         <!-- create account form -->
-        <div id="create-account-dialog" class="signup-modal" title="Create new account">
-            <p class="validateTips">All form fields are required.</p>
-            <form autocomplete="off">
-                <fieldset>
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username" class="text ui-widget-content ui-corner-all">
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all">
-                </fieldset>
-            </form>
+        <div class="modal fade" id="create-account-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div title="Create new account">
+                            <p class="validateTips">All form fields are required.</p>
+                            <form autocomplete="off">
+                                <fieldset>
+                                    <label for="username">Username</label>
+                                    <input type="text" name="username" id="username" class="text ui-widget-content ui-corner-all">
+                                    <label for="email">Email</label>
+                                    <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all">
+                                    <label for="password">Password</label>
+                                    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all">
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="create-account-button" type="button" class="btn btn-primary">Create account</button>
+                        <button id="close-create-account-button" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
+
+
         <!-- login account form -->
-        <div id="login-account-dialog" class="signup-modal" title="Login to your account">
+        <div id="login-account-dialog" title="Login to your account">
             <p class="validateTips">All form fields are required.</p>
             <form autocomplete="off">
                 <fieldset>
@@ -151,7 +183,7 @@
         </div>        
 
         <!-- verify account form -->
-        <div id="verify-account-dialog" class="signup-modal" title="Verify account">
+        <div id="verify-account-dialog" title="Verify account">
             <p class="validateTips">All form fields are required.</p>
             <form autocomplete="off">
                 <fieldset>
@@ -244,6 +276,7 @@
         <script src="../js/showcode.js"></script>
         <script src="../js/validation.js"></script>
         <script src="../js/tips.js"></script>
+        <script src="./js/runexample.js"></script>
         <script>
             $(function() {
 
@@ -286,94 +319,79 @@
 
                 var accountInfo = {};
 
-                $("#create-account-dialog").dialog({
-                    autoOpen: false,
-                    height: 265,
-                    width: 350,
-                    modal: true,
-                    position: {my: "right-20 top+5", at: "right top", of: $("#example")},
-                    buttons: {
-                        "Create an account": function() {
+                $("#create-account-button").click(function() {
 
-                            var bValid = validateAccount(username, email, password);
-                            if (bValid) {
+                    var bValid = validateAccount(username, email, password);
+                    if (bValid) {
 
-                                showCode("_user_create_account_submit");
-                                _gaq.push(["_trackPageview", "/user/create-account/submit"]);
+                        showCode("_user_create_account_submit");
+                        _gaq.push(["_trackPageview", "/user/create-account/submit"]);
+
+                        $.ajax({
+                            url: 'ajax/createAccount.php',
+                            type: "POST",
+                            data: {
+                                username: username.val(),
+                                email: email.val(),
+                                password: password.val()
+                            },
+                            dataType: "JSON"
+                        }).done(function(respCreateAccount) {
+                            accountInfo.email = respCreateAccount.email;
+                            accountInfo.account = respCreateAccount.username;
+                            if (respCreateAccount.success && respCreateAccount.email) {
 
                                 $.ajax({
-                                    url: 'ajax/createAccount.php',
+                                    url: 'ajax/sendVerificationEmail.php',
                                     type: "POST",
                                     data: {
-                                        username: username.val(),
-                                        email: email.val(),
-                                        password: password.val()
+                                        email: respCreateAccount.email,
+                                        verificationcode: respCreateAccount.verificationcode
                                     },
                                     dataType: "JSON"
-                                }).done(function(respCreateAccount) {
-                                    accountInfo.email = respCreateAccount.email;
-                                    accountInfo.account = respCreateAccount.username;
-                                    if (respCreateAccount.success && respCreateAccount.email) {
+                                }).done(function(respSendEmail) {
 
-                                        $.ajax({
-                                            url: 'ajax/sendVerificationEmail.php',
-                                            type: "POST",
-                                            data: {
-                                                email: respCreateAccount.email,
-                                                verificationcode: respCreateAccount.verificationcode
-                                            },
-                                            dataType: "JSON"
-                                        }).done(function(respSendEmail) {
+                                    if (respSendEmail.success) {
+                                        $("#verify-account-dialog").dialog("open");
 
-                                            if (respSendEmail.success) {
-                                                $("#verify-account-dialog").dialog("open");
+                                        showCode("_user_create_account_verify_open");
+                                        _gaq.push(["_trackPageview", "/user/create-account/verify/open"]);
 
-                                                showCode("_user_create_account_verify_open");
-                                                _gaq.push(["_trackPageview", "/user/create-account/verify/open"]);
-
-                                            } else {
-
-                                                showCode("_user_create_account_email-failed");
-                                                _gaq.push(["_trackPageview", "/user/create-account/email-failed"]);
-
-                                                alert(respSendEmail.failureMsg);
-
-                                            }
-                                        })
-                                                .fail(function() {
-                                            console.log("POST failed!");
-                                        });
                                     } else {
 
-                                        showCode("_user_create_account_submit_failed");
-                                        _gaq.push(["_trackPageview", "/user/create-account/submit-failed"]);
+                                        showCode("_user_create_account_email-failed");
+                                        _gaq.push(["_trackPageview", "/user/create-account/email-failed"]);
 
-                                        alert(respCreateAccount.failureMsg);
+                                        alert(respSendEmail.failureMsg);
+
                                     }
                                 })
                                         .fail(function() {
                                     console.log("POST failed!");
                                 });
-                                $(this).dialog("close");
+                            } else {
+
+                                showCode("_user_create_account_submit_failed");
+                                _gaq.push(["_trackPageview", "/user/create-account/submit-failed"]);
+
+                                alert(respCreateAccount.failureMsg);
                             }
-                        },
-                        Cancel: function() {
-
-                            showCode("_user_create_account_cancel");
-                            _gaq.push(["_trackPageview", "/user/create-account/cancel"]);
-
-                            $(this).dialog("close");
-
-                        }
-                    },
-                    close: function(event, ui) {
-                        if (event.originalEvent) {
-                            // track the close only if initiated by user
-                            showCode("_user_create_account_close");
-                            _gaq.push(["_trackPageview", "/user/create-account/close"]);
-                        }
-                        allFields.val("").removeClass("ui-state-error");
+                        })
+                                .fail(function() {
+                            console.log("POST failed!");
+                        });
+                        $(this).dialog("close");
                     }
+                });
+
+                $("#close-create-account-button").click(function() {
+                    // track the close only if initiated by user
+                    showCode("_user_create_account_close");
+                    _gaq.push(["_trackPageview", "/user/create-account/close"]);
+                });
+
+                $("#create-account-dialog").on("hidden.bs.modal", function() {
+                    allFields.val("").removeClass("ui-state-error");
                 });
 
                 $("#login-account-dialog").dialog({
@@ -517,7 +535,7 @@
 
                 $("#create-account-button")
                         .click(function() {
-                    $("#create-account-dialog").dialog("open");
+                    $("#create-account-dialog-old").dialog("open");
 
                     showCode("_user_create_account_open");
                     _gaq.push(["_trackPageview", "/user/create-account/open"]);
