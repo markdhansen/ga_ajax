@@ -1,3 +1,11 @@
+<?php
+$errorLog = ini_get('error_log');
+$isMamp = false;
+if (strpos($errorLog, 'MAMP') !== false) {
+    $isMamp = true;
+}
+$home = ($isMamp ? "/gaexamples" : "/");
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,16 +27,7 @@
 
         <?php include_once("analyticstracking.php") ?>
     </head>
-
     <body>
-        <?php
-        $errorLog = ini_get('error_log');
-        $isMamp = false;
-        if (strpos($errorLog, 'MAMP') !== false) {
-            $isMamp = true;
-        }
-        $home = ($isMamp ? "/gaexamples" : "/");
-        ?>
         <div class="topnav">
             <div class="row">
                 <div class="col-md-4 col-sm-4">
