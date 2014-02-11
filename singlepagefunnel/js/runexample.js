@@ -130,7 +130,6 @@ $(function() {
         }
     });
 
-
     $("#close-login-account-button").click(function() {
         showCode("_user_login_close");
         _gaq.push(["_trackPageview", "/user/login/close"]);
@@ -140,86 +139,53 @@ $(function() {
         allFields.val("").removeClass("ui-state-error");
     });
 
+    $("#verify-account-dialog").click(function() {
 
-    $("#verify-account-dialog").dialog({
-        autoOpen: false,
-        height: 350,
-        width: 300,
-        modal: true,
-        position: {my: "top", at: "top", of: $("#description")},
-        buttons: {
-            "Verify account": function() {
+        showCode("_user_create_account_verify_submit");
+        _gaq.push(["_trackPageview", "/user/create-account/verify/submit"]);
 
-                showCode("_user_create_account_verify_submit");
-                _gaq.push(["_trackPageview", "/user/create-account/verify/submit"]);
-
-                verificationInput = $("#verificationInput").val();
-                // check verification code in database
-                $.ajax({
-                    url: 'ajax/checkVerificationCode.php',
-                    type: "POST",
-                    data: {
-                        username: accountInfo.account,
-                        email: accountInfo.email,
-                        verificationcode: verificationInput
-                    },
-                    dataType: "JSON"
-                }).done(function(resp) {
-                    if (resp.success) {
-
-                        showCode("_user_create_account_success");
-                        _gaq.push(["_trackPageview", "/user/create-account/success"]);
-
-                        alert("Congrats!  You have verified your account.");
-
-                    } else {
-                        showCode("_user_create_account_verify_failed");
-                        _gaq.push(["_trackPageview", "/user/create-account/verify/failed"]);
-
-                        alert("Bummer. " + resp.failureMsg);
-                    }
-                })
-                        .fail(function() {
-                    console.log("POST failed!");
-                });
-                $(this).dialog("close");
+        verificationInput = $("#verificationInput").val();
+        // check verification code in database
+        $.ajax({
+            url: 'ajax/checkVerificationCode.php',
+            type: "POST",
+            data: {
+                username: accountInfo.account,
+                email: accountInfo.email,
+                verificationcode: verificationInput
             },
-            Cancel: function() {
+            dataType: "JSON"
+        }).done(function(resp) {
+            if (resp.success) {
 
-                showCode("_user_create_account_verify_canceled");
-                _gaq.push(["_trackPageview", "/user/create-account/verify/canceled"]);
+                showCode("_user_create_account_success");
+                _gaq.push(["_trackPageview", "/user/create-account/success"]);
 
-                $(this).dialog("close");
+                alert("Congrats!  You have verified your account.");
 
+            } else {
+                showCode("_user_create_account_verify_failed");
+                _gaq.push(["_trackPageview", "/user/create-account/verify/failed"]);
+
+                alert("Bummer. " + resp.failureMsg);
             }
-        },
-        close: function(event, ui) {
-            if (event.originalEvent) {
-                // track the close only if initiated by user
-                showCode("_user_create_account_verify_close");
-                _gaq.push(["_trackPageview", "/user/create-account/verify/close"]);
-            }
-            allFields.val("").removeClass("ui-state-error");
-        }
+        })
+                .fail(function() {
+            console.log("POST failed!");
+        });
+        $(this).dialog("close");
     });
 
-    $("#create-account-button")
-            .click(function() {
-        $("#create-account-dialog-old").dialog("open");
 
-        showCode("_user_create_account_open");
-        _gaq.push(["_trackPageview", "/user/create-account/open"]);
-
+    $("#close-verify-account-button").click(function() {
+        showCode("_user_create_account_verify_close");
+        _gaq.push(["_trackPageview", "/user/create-account/verify/close"]);
     });
 
-    $("#login-menu-item")
-            .click(function() {
-        $("#login-account-dialog").dialog("open");
-
-        showCode("_user_login_open");
-        _gaq.push(["_trackPageview", "/user/login/open"]);
-
+    $("#verify-account-dialog").on("hidden.bs.modal", function() {
+        allFields.val("").removeClass("ui-state-error");
     });
+
 
     /* Toggle visibilities when run example */
     $("#run-example-button").click(function() {
@@ -230,6 +196,31 @@ $(function() {
         $("body").animate({scrollTop: topOfExample}, 500);
     });
 
+    function getRunUIDims() {
+        var runUI = $(".run-ui")[0];
+        return [
+            Math.ceil($(runUI).offset().top),
+            Math.ceil($(runUI).offset().left) - 1.0,
+            Math.ceil($(runUI).width()) + 1.0,
+            Math.ceil($(runUI).height())
+        ];
+    }
+
+    $("#create-account-dialog").on("shown.bs.modal", function() {
+        var area = getRunUIDims();
+        $("#create-account-dialog").css({
+            top: area[0],
+            left: area[1],
+            width: area[2],
+            height: area[3]
+        });
+        $(".modal-backdrop").css({
+            top: area[0],
+            left: area[1],
+            width: area[2],
+            height: area[3]
+        });
+    });
 
 });
 

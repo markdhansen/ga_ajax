@@ -1,3 +1,35 @@
+/*.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 50%;
+}*/
+
+/*#create-account-dialog {
+    position: absolute;
+    top: 250px;
+    left: 100px;
+    height: 300px;
+    width: 900px;
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 250px;
+    left: 100px;
+    height: 300px;
+    width: 900px;
+}*/
+
+body, html, .col-md-7, .col-md-8, .row, .run-ui {
+   height:100%;
+}
+
+.navbar-btn{
+    margin-right:10px;
+}
+
 label, input { 
     display:block; 
 }
@@ -33,6 +65,7 @@ h1 {
 .run-ui {
     padding-right: 0px;
     padding-left: 0px;
+    height: 300px;
 }
 .run-code {
     padding-right: 0px;

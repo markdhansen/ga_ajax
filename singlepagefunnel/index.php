@@ -67,28 +67,30 @@ $home = ($isMamp ? "/gaexamples" : "/");
                         </div>
                     </div>
                     <div class="col-md-12 run-ui lightbluebg" style="display:none">
-                        <div class="navbar navbar-default navbar-static run-ui-navbar" role="navigation">
-                            <div class="container-fluid">
-                                <div class="navbar-header">
-                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                        <span class="sr-only">Toggle navigation</span>
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                    </button>
-                                    <a class="navbar-brand" href="javascript:void(0)">Single Page Funnel</a>
-                                </div>
-                                <div class="navbar-collapse collapse">
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <li id="create-account-menu-item"><a href="javascript:void(0)" data-toggle="modal" data-target="#create-account-dialog">Create account</a></li>
-                                        <li id="login-menu-item"><a href="javascript:void(0)" data-toggle="modal" data-target="#login-account-dialog">Login</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="run-ui-container">
-                            <a id="create-account-button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#create-account-dialog">Create account</a>
-                        </div>
+<!--                        <iframe src="./example.php"></iframe>-->
+                        <iframe src="./example.php" height="100%" width="100%"></iframe>
+                        <!--                        <div class="navbar navbar-default navbar-static run-ui-navbar" role="navigation">
+                                                    <div class="container-fluid">
+                                                        <div class="navbar-header">
+                                                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                                                <span class="sr-only">Toggle navigation</span>
+                                                                <span class="icon-bar"></span>
+                                                                <span class="icon-bar"></span>
+                                                                <span class="icon-bar"></span>
+                                                            </button>
+                                                            <a class="navbar-brand" href="javascript:void(0)">Single Page Funnel</a>
+                                                        </div>
+                                                        <div class="navbar-collapse collapse">
+                                                            <ul class="nav navbar-nav navbar-right">
+                                                                <li id="create-account-menu-item"><button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#create-account-dialog">Sign Up</button></li>
+                                                                <li id="login-menu-item"><button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#login-account-dialog">Login</button></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="run-ui-container">
+                                                    <a id="create-account-button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#create-account-dialog">Create account</a>
+                                                </div>-->
                     </div>
                     <div class="col-md-12 run-code" style="display:none">
                         <h3 class="code-header">Code window</h3>
@@ -105,7 +107,7 @@ $home = ($isMamp ? "/gaexamples" : "/");
         </div>
 
         <!-- create account form -->
-        <div class="modal fade" id="create-account-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal" id="create-account-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -165,15 +167,32 @@ $home = ($isMamp ? "/gaexamples" : "/");
         </div>    
 
         <!-- verify account form -->
-        <div id="verify-account-dialog" title="Verify account">
-            <p class="validateTips">All form fields are required.</p>
-            <form autocomplete="off">
-                <fieldset>
-                    <label for="verificationInput">Verification code</label>
-                    <input type="text" name="verificationInput" id="verificationInput" class="text ui-widget-content ui-corner-all">
-                </fieldset>
-            </form>
-        </div>
+        <div class="modal fade" id="verify-account-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div title="Verify account">
+                            <p class="validateTips">All form fields are required.</p>
+                            <form autocomplete="off">
+                                <fieldset>
+                                    <label for="verificationInput">Verification code</label>
+                                    <input type="text" name="verificationInput" id="verificationInput" value="" class="text ui-widget-content ui-corner-all">
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="verify-account-button" type="button" class="btn btn-primary">Verify account</button>
+                        <button id="close-verify-account-button" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>    
+
 
         <!-- div that holds code that gets displayed in code window at runtime -->
         <div id="this-file" style="display:none;">
@@ -201,11 +220,5 @@ $home = ($isMamp ? "/gaexamples" : "/");
         <script src="../js/validation.js"></script>
         <script src="../js/tips.js"></script>
         <script src="./js/runexample.js"></script>
-        <script>
-            $(function() {
-
-
-            });
-        </script>
     </body>
 </html>
