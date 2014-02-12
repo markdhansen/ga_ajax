@@ -22,8 +22,12 @@
     width: 900px;
 }*/
 
+#create-account-dialog .modal-body {
+    max-height: 200px;
+}
+
 body, html, .col-md-7, .col-md-8, .row, .run-ui {
-   height:100%;
+    height:100%;
 }
 
 .navbar-btn{

@@ -5,6 +5,10 @@ if (strpos($errorLog, 'MAMP') !== false) {
     $isMamp = true;
 }
 $home = ($isMamp ? "/gaexamples" : "/");
+
+$cookies = $_COOKIE;
+$cookiesString = print_r($cookies, true);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,6 +32,7 @@ $home = ($isMamp ? "/gaexamples" : "/");
         <?php include_once("analyticstracking.php") ?>
     </head>
     <body>
+        <div id="hidden-cookies" style="display:none"><?php echo $cookiesString; ?></div>
         <div class="topnav">
             <div class="row">
                 <div class="col-md-4 col-sm-4">
@@ -176,7 +181,7 @@ $home = ($isMamp ? "/gaexamples" : "/");
 
 
 
-                <a href="#" class="btn btn-default btn-block">Load more <i class="fa fa-caret-down"></i></a>
+                <a href="#" id="load-more-button" class="btn btn-default btn-block">Load more <i class="fa fa-caret-down"></i></a>
 
 
 
@@ -185,5 +190,6 @@ $home = ($isMamp ? "/gaexamples" : "/");
 
         <script src="//code.jquery.com/jquery-1.9.1.js"></script>
         <script src="js/bootstrap.js"></script>
+        <script src="js/testcookies.js"></script>
     </body>
 </html>
