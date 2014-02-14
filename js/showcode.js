@@ -20,24 +20,27 @@ function showCode(symbol) {
         if (codeArr[i].indexOf("showCode(\"") === -1) {
             // display all lines except calls to showCode
             if ((codeArr[i].indexOf("_gaq.push") !== -1) && nextGaqPushIsYellow) {
-                codeSegment += "<div style='background-color:yellow;'>" + codeArr[i] + "</div>\n";
+                codeSegment += "<div id='_scTopLine' style='background-color:yellow;'>" + codeArr[i] + "</div>";
                 nextGaqPushIsYellow = false;
             } else {
                 codeSegment += codeArr[i] + "\n";
             }
         } else if (i === thisShowCodeLineNo) {
             // replace the showCode line at current symbol with a div for top of scroll box
-            codeSegment += "<div id='_scTopLine'></div>\n";
+            // codeSegment += "<div id='_scTopLine'></div>";
             nextGaqPushIsYellow = true;
         }
     }
-    $("#code-window").html(codeSegment);
-    
-    var codeWindowHeight = $("#code-window")[0].offsetHeight;
-    var codeTextHeight = $("#code-window")[0].scrollHeight;
-    var codeTop = Math.round((codeTextHeight - codeWindowHeight)/2);
-    $("#code-window").scrollTop(codeTop);
-    // alert("codeTextHeight = " + codeTextHeight + ";  codeWindowHeight = " + codeWindowHeight + ";  codeTop = " + codeTop)
+
+    $("#code-window", window.parent.document).html(codeSegment);
+
+    /*
+     * this calculation is still wrong !!!
+     */
+    var codeWindowHeight = $("#code-window", window.parent.document)[0].offsetHeight;
+    var topLineDivHeight = $("#_scTopLine", window.parent.document).height();
+    var codeTop = $("#_scTopLine", window.parent.document).position().top - (codeWindowHeight / 2) - (3 * topLineDivHeight);
+    $("#code-window", window.parent.document).scrollTop(codeTop);
 
 }
 

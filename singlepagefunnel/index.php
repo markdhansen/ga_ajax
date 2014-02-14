@@ -21,7 +21,6 @@ $home = ($isMamp ? "/gaexamples" : "/");
         <!-- CSS -->
         <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.css" />
-        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-tour.css" />
         <link rel="stylesheet" type="text/css" media="all" href="../css/style.css" />
         <link rel="stylesheet" type="text/css" media="all" href="../css/dan.css" />
         <link rel="stylesheet" type="text/css" media="all" href="./css/example.css" />
@@ -215,7 +214,6 @@ $home = ($isMamp ? "/gaexamples" : "/");
         <script src="//code.jquery.com/jquery-1.9.1.js"></script>
         <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script src="../js/bootstrap.js"></script>
-        <script src="../js/bootstrap-tour.js"></script>
         <script src="../js/showcode.js"></script>
         <script src="../js/validation.js"></script>
         <script src="../js/tips.js"></script>

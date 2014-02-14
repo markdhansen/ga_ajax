@@ -32,7 +32,6 @@ $(function() {
                 accountInfo.email = respCreateAccount.email;
                 accountInfo.account = respCreateAccount.username;
                 if (respCreateAccount.success && respCreateAccount.email) {
-
                     $.ajax({
                         url: 'ajax/sendVerificationEmail.php',
                         type: "POST",
@@ -44,45 +43,44 @@ $(function() {
                     }).done(function(respSendEmail) {
 
                         if (respSendEmail.success) {
-                            $("#verify-account-dialog").dialog("open");
-
+                            $("#create-account-dialog").modal('hide');
                             showCode("_user_create_account_verify_open");
                             _gaq.push(["_trackPageview", "/user/create-account/verify/open"]);
-
+                            $("#verify-account-dialog").modal('show');
                         } else {
-
                             showCode("_user_create_account_email-failed");
                             _gaq.push(["_trackPageview", "/user/create-account/email-failed"]);
-
                             alert(respSendEmail.failureMsg);
-
                         }
                     })
                             .fail(function() {
                         console.log("POST failed!");
                     });
                 } else {
-
                     showCode("_user_create_account_submit_failed");
                     _gaq.push(["_trackPageview", "/user/create-account/submit-failed"]);
-
                     alert(respCreateAccount.failureMsg);
                 }
             })
                     .fail(function() {
                 console.log("POST failed!");
             });
+            $("#create-account-dialog").modal('hide');
         }
     });
 
-    $("#close-create-account-button").click(function() {
-        // track the close only if initiated by user
-        showCode("_user_create_account_close");
-        _gaq.push(["_trackPageview", "/user/create-account/close"]);
+    $("#create-account-dialog").on("show.bs.modal", function() {
+        showCode("_user_create_account_open");
+        _gaq.push(["_trackPageview", "/user/create-account/open"]);
     });
 
     $("#create-account-dialog").on("hidden.bs.modal", function() {
         allFields.val("").removeClass("ui-state-error");
+    });
+
+    $("#close-create-account-button").click(function() {
+        showCode("_user_create_account_close");
+        _gaq.push(["_trackPageview", "/user/create-account/close"]);
     });
 
     /* Run the login funnel */
@@ -130,20 +128,24 @@ $(function() {
         }
     });
 
-    $("#close-login-account-button").click(function() {
-        showCode("_user_login_close");
-        _gaq.push(["_trackPageview", "/user/login/close"]);
+    $("#login-account-dialog").on("show.bs.modal", function() {
+        showCode("_user_login_open");
+        _gaq.push(["_trackPageview", "/user/login/open"]);
     });
 
     $("#login-account-dialog").on("hidden.bs.modal", function() {
         allFields.val("").removeClass("ui-state-error");
     });
 
-    $("#verify-account-dialog").click(function() {
+    $("#close-login-account-button").click(function() {
+        showCode("_user_login_close");
+        _gaq.push(["_trackPageview", "/user/login/close"]);
+    });
 
+
+    $("#verify-account-button").click(function() {
         showCode("_user_create_account_verify_submit");
         _gaq.push(["_trackPageview", "/user/create-account/verify/submit"]);
-
         verificationInput = $("#verificationInput").val();
         // check verification code in database
         $.ajax({
@@ -177,6 +179,12 @@ $(function() {
     });
 
 
+    $("#verify-account-dialog").on("show.bs.modal", function() {
+        showCode("_user_create_account_verify_open");
+        _gaq.push(["_trackPageview", "/user/create-account/verify/open"]);
+    });
+
+
     $("#close-verify-account-button").click(function() {
         showCode("_user_create_account_verify_close");
         _gaq.push(["_trackPageview", "/user/create-account/verify/close"]);
@@ -196,31 +204,6 @@ $(function() {
         $("body").animate({scrollTop: topOfExample}, 500);
     });
 
-    function getRunUIDims() {
-        var runUI = $(".run-ui")[0];
-        return [
-            Math.ceil($(runUI).offset().top),
-            Math.ceil($(runUI).offset().left) - 1.0,
-            Math.ceil($(runUI).width()) + 1.0,
-            Math.ceil($(runUI).height())
-        ];
-    }
-
-    $("#create-account-dialog").on("shown.bs.modal", function() {
-        var area = getRunUIDims();
-        $("#create-account-dialog").css({
-            top: area[0],
-            left: area[1],
-            width: area[2],
-            height: area[3]
-        });
-        $(".modal-backdrop").css({
-            top: area[0],
-            left: area[1],
-            width: area[2],
-            height: area[3]
-        });
-    });
 
 });
 
