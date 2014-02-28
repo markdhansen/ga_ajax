@@ -1,8 +1,10 @@
 body {
-    padding-bottom:0 !important;
-    background:#4e004e
+    /*padding-bottom:0 !important;*/
+    background:none repeat scroll 0 0 rgb(37, 37, 39);
 }
-
+iframe {
+	border: none;
+}
 h1 {color: #4e004e}
 .highlight {background:yellow}
 .listings {padding:30px}
@@ -54,22 +56,22 @@ button.btn.btn-default.btn-block {
 #inputSuccess3 {margin-bottom:5px}
 
 hr {
-    border-top: 1px solid #5c1a74;
-    border-bottom: 1px solid #9426ba;
+    border-bottom: 1px solid #CCCCCC;
+    border-top: 1px solid #666666;
 }
 
 h3 {
     color:#fff;
-    opacity:.4;
     font-size:1.5em;
 }
 
-h3.code-header {
-    color:#000;
-}
 
 .right {text-align:right}
 
+.topnav {
+	background: linear-gradient(rgb(17, 17, 17), rgb(34, 34, 34)) repeat scroll 0 0 transparent;
+	border-bottom: 1px solid rgb(61, 61, 61);
+}
 .help-icons {
     height:64px;
     width:64px;
@@ -113,18 +115,15 @@ h3.code-header {
 
 
 @media (min-width: 768px) and (max-width: 979px) {
-    .topnav {text-align:center;padding-bottom:20px !important;}
     .right {text-align:right !important}
 }
 
 @media (max-width: 767px) {
-    .topnav {text-align:center;padding-bottom:20px !important;}
     .right {text-align:center !important}
     h1 {font-size:1.2em}
 }
 
 @media (max-width: 480px) {
-    .topnav {text-align:center;padding-bottom:20px !important;}
     .right {text-align:center !important}
     h1 {font-size:1.2em}
 

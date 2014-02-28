@@ -2,7 +2,7 @@
 $errorLog = ini_get('error_log');
 $isMamp = false;
 if (strpos($errorLog, 'MAMP') !== false) {
-    $isMamp = true;
+	$isMamp = true;
 }
 $home = ($isMamp ? "/gaexamples" : "/");
 ?>
@@ -25,186 +25,70 @@ $home = ($isMamp ? "/gaexamples" : "/");
         <link rel="stylesheet" type="text/css" media="all" href="../css/dan.css" />
         <link rel="stylesheet" type="text/css" media="all" href="./css/example.css" />
 
-        <?php include_once("../analyticstracking.php") ?>
+		<?php include_once("../analyticstracking.php") ?>
     </head>
     <body>
-        <div class="topnav">
-            <div class="row">
-                <div class="col-md-4 col-sm-4">
-                    <div class="logo">
-                        <a href="<?php echo $home; ?>">GAExamples</a>
-                    </div>
-                </div>
-                <div class="col-md-8 col-sm-8 right"> 
-                </div>
-            </div>
-        </div>
-        <div class="row purplebg">
-            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
-                <a href="<?php echo $home; ?>" class="btn btn-default"><i class="fa fa-caret-left"></i> Back to  examples </a>
-                <hr />
-                <div class="row">
-                    <div id="example" class="col-md-12">
-                        <div class="main-listing">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div class="help-icons single-funnel"></div>
-                                    <h1>Single page funnel</h1> 
-                                </div>
-                                <div class="col-md-3 right">
-                                    <a href="#"><i class="fa fa-star orange"></i> Favorited</a>
-                                </div>
-                            </div>
-                            <p>
-                                This example illustrates how to use Google Analytics virtual pageviews to create a funnel that tracks conversion success for a multi-step account creation process. </p>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu turpis eu magna interdum mollis nec sollicitudin arcu. Integer vitae odio suscipit, sagittis felis id, auctor libero. Nullam malesuada augue non ipsum facilisis pulvinar. Sed gravida commodo metus, id varius dui lobortis vitae. Ut et massa massa. 
-                            </p>
-                            <p>
-                                <a id="run-example-button" class="btn btn-sm btn-primary">Run example &raquo;</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-12 run-ui lightbluebg" style="display:none">
-<!--                        <iframe src="./example.php"></iframe>-->
-                        <iframe src="./example.php" height="100%" width="100%"></iframe>
-                        <!--                        <div class="navbar navbar-default navbar-static run-ui-navbar" role="navigation">
-                                                    <div class="container-fluid">
-                                                        <div class="navbar-header">
-                                                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                                                <span class="sr-only">Toggle navigation</span>
-                                                                <span class="icon-bar"></span>
-                                                                <span class="icon-bar"></span>
-                                                                <span class="icon-bar"></span>
-                                                            </button>
-                                                            <a class="navbar-brand" href="javascript:void(0)">Single Page Funnel</a>
-                                                        </div>
-                                                        <div class="navbar-collapse collapse">
-                                                            <ul class="nav navbar-nav navbar-right">
-                                                                <li id="create-account-menu-item"><button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#create-account-dialog">Sign Up</button></li>
-                                                                <li id="login-menu-item"><button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#login-account-dialog">Login</button></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="run-ui-container">
-                                                    <a id="create-account-button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#create-account-dialog">Create account</a>
-                                                </div>-->
-                    </div>
-                    <div class="col-md-12 run-code" style="display:none">
-                        <h3 class="code-header">Code window</h3>
-                        <div class="panel-body-wrapper">
-                            <div class="wide">
-                                <pre id="code-window" class="scroller-area"></pre>
-                            </div>
-                        </div>                    
-                    </div>
+		<nav class="navbar navbar-inverse topnav" role="navigation">
+			<div class="logo">
+				<a href="<?php echo $home; ?>">GAExamples</a>
+			</div>
+		</nav>	
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9 col-md-offset-1 col-sm-10 col-sm-offset-1">
+					<hr />
+					<div class="row">
+						<div id="example" class="col-md-12">
+							<div class="main-listing">
+								<div class="row">
+									<div class="col-md-9">
+										<div class="help-icons single-funnel"></div>
+										<h1>Single page funnel</h1> 
+									</div>
+									<div class="col-md-3 right">
+										<a href="#"><i class="fa fa-star orange"></i> Favorited</a>
+									</div>
+								</div>
+								<p>
+									This example illustrates how to use Google Analytics virtual pageviews to create a funnel that tracks conversion success for a multi-step account creation process. </p>
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu turpis eu magna interdum mollis nec sollicitudin arcu. Integer vitae odio suscipit, sagittis felis id, auctor libero. Nullam malesuada augue non ipsum facilisis pulvinar. Sed gravida commodo metus, id varius dui lobortis vitae. Ut et massa massa. 
+								</p>
+								<p>
+									<a id="run-example-button" class="btn btn-sm btn-primary">Run example &raquo;</a>
+								</p>
+							</div>
+						</div>
+						<div class="col-md-12 run-ui hidden">
+							<iframe src="example.php" height="100%" width="100%"></iframe>
+						</div>
+						<div class="col-md-12 run-code hidden">
+							<h3 class="code-header">Code window</h3>
+							<div class="panel-body-wrapper">
+								<div class="wide">
+									<pre id="code-window" class="scroller-area"></pre>
+								</div>
+							</div>                    
+						</div>
 
-                </div>
-                <hr />
-            </div>
-        </div>
-
-        <!-- create account form -->
-        <div class="modal" id="create-account-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div title="Create new account">
-                            <p class="validateTips">All form fields are required.</p>
-                            <form autocomplete="off">
-                                <fieldset>
-                                    <label for="username">Username</label>
-                                    <input type="text" name="username" id="username" class="text ui-widget-content ui-corner-all">
-                                    <label for="email">Email</label>
-                                    <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all">
-                                    <label for="password">Password</label>
-                                    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all">
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="create-account-button" type="button" class="btn btn-primary">Create account</button>
-                        <button id="close-create-account-button" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- login account form -->
-        <div class="modal fade" id="login-account-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div title="Login">
-                            <p class="validateTips">All form fields are required.</p>
-                            <form autocomplete="off">
-                                <fieldset>
-                                    <label for="email">Email</label>
-                                    <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all">
-                                    <label for="password">Password</label>
-                                    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all">
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="login-account-button" type="button" class="btn btn-primary">Create account</button>
-                        <button id="close-login-account-button" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>    
-
-        <!-- verify account form -->
-        <div class="modal fade" id="verify-account-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div title="Verify account">
-                            <p class="validateTips">All form fields are required.</p>
-                            <form autocomplete="off">
-                                <fieldset>
-                                    <label for="verificationInput">Verification code</label>
-                                    <input type="text" name="verificationInput" id="verificationInput" value="" class="text ui-widget-content ui-corner-all">
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="verify-account-button" type="button" class="btn btn-primary">Verify account</button>
-                        <button id="close-verify-account-button" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>    
-
+					</div>
+					<hr />
+				</div>
+			</div>
+		</div>
 
         <!-- div that holds code that gets displayed in code window at runtime -->
         <div id="this-file" style="display:none;">
-            <?php
-            $file = file_get_contents('./js/runexample.js', FILE_USE_INCLUDE_PATH);
-            $escapedFile = str_replace(">", "&gt;", str_replace("<", "&lt;", str_replace("&", "&amp;", $file)));
-            $paddingSize = 200;
-            $padding = "";
-            for ($i = 1; $i <= $paddingSize; $i++) {
-                $padding .= "\n";
-            }
-            echo $padding . $escapedFile . $padding;
-            ?>
+			<?php
+			$file = file_get_contents('./js/runexample.js', FILE_USE_INCLUDE_PATH);
+			$escapedFile = str_replace(">", "&gt;", str_replace("<", "&lt;", str_replace("&", "&amp;", $file)));
+			$paddingSize = 200;
+			$padding = "";
+			for ($i = 1; $i <= $paddingSize; $i++) {
+				$padding .= "\n";
+			}
+			echo $padding . $escapedFile . $padding;
+			?>
         </div>
 
         <!-- Bootstrap core JavaScript
@@ -216,7 +100,6 @@ $home = ($isMamp ? "/gaexamples" : "/");
         <script src="../js/bootstrap.js"></script>
         <script src="../js/showcode.js"></script>
         <script src="../js/validation.js"></script>
-        <script src="../js/tips.js"></script>
         <script src="./js/runexample.js"></script>
     </body>
 </html>

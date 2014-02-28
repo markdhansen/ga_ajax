@@ -4,6 +4,7 @@ function showCode(symbol) {
     var codeArr = code.split("\n");
     var codeSegment = "";
     var thisShowCodeLineNo = 0;
+	var doc = window.parent.document;
     for (var i = 0; i < codeArr.length; i++)
     {
         if (codeArr[i].indexOf(symbol) !== -1) {
@@ -31,17 +32,16 @@ function showCode(symbol) {
             nextGaqPushIsYellow = true;
         }
     }
-
-    $("#code-window", window.parent.document).html(codeSegment);
-
-    /*
-     * this calculation is still wrong !!!
-     */
-    var codeWindowHeight = $("#code-window", window.parent.document)[0].offsetHeight;
-    var topLineDivHeight = $("#_scTopLine", window.parent.document).height();
-    var codeTop = $("#_scTopLine", window.parent.document).position().top - (codeWindowHeight / 2) - (3 * topLineDivHeight);
-    $("#code-window", window.parent.document).scrollTop(codeTop);
-
+	
+	var codeWindow = doc.getElementById("code-window");
+    codeWindow.innerHTML = codeSegment;
+	
+	
+	var highlightRow = doc.getElementById("_scTopLine");
+    var codeWindowHeight = doc.getElementById("code-window").offsetHeight;
+    var topLineDivHeight = highlightRow.offsetHeight;
+    var codeTop = highlightRow.offsetTop - ((codeWindowHeight - topLineDivHeight) / 2);
+    $(codeWindow).animate({scrollTop: codeTop}, 500);
 }
 
 

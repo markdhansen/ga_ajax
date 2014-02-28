@@ -45,22 +45,26 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Create new account</h4>
+                        <h4 class="modal-title">Create new account</h4>
                     </div>
                     <div class="modal-body">
-                        <div title="Create new account">
-                            <p class="validateTips">All form fields are required.</p>
+                        <div title="Create new account">                            
                             <form autocomplete="off">
-                                <fieldset>
+								<div class="form-group">
                                     <label for="username">Username</label>
-                                    <input type="text" name="username" id="username" class="text ui-widget-content ui-corner-all">
+                                    <input type="text" name="username" id="username" class="form-control text ui-widget-content ui-corner-all" required="required" placeholder="Enter username">
+								</div>	
+                                <div class="form-group">									
                                     <label for="email">Email</label>
-                                    <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all">
-                                    <label for="password">Password</label>
-                                    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all">
-                                </fieldset>
+                                    <input id="email" class="form-control text ui-widget-content ui-corner-all" required="required" type="email" name="email" value="" placeholder="Enter email">
+								</div>	
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input id="password" class="form-control text ui-widget-content ui-corner-all" type="password" name="password" value="" required="required" placeholder="Password">
+								</div>
                             </form>
                         </div>
+						<p class="validateTips alert alert-warning">All form fields are required.</p>
                     </div>
                     <div class="modal-footer">
                         <button id="create-account-button" type="button" class="btn btn-primary">Create account</button>
@@ -76,28 +80,30 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                        <h4 class="modal-title">Login</h4>
                     </div>
                     <div class="modal-body">
-                        <div title="Login">
-                            <p class="validateTips">All form fields are required.</p>
+                        <div title="Login">                            
                             <form autocomplete="off">
-                                <fieldset>
+                                <div class="form-group">									
                                     <label for="email">Email</label>
-                                    <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all">
-                                    <label for="password">Password</label>
-                                    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all">
-                                </fieldset>
+                                    <input id="login-email" class="form-control text ui-widget-content ui-corner-all" required="required" type="email" name="email" value="" placeholder="Enter email">
+								</div>	
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input id="login-password" class="form-control text ui-widget-content ui-corner-all" type="password" name="password" value="" required="required" placeholder="Password">
+								</div>
                             </form>
                         </div>
+						<p class="validateTips alert alert-warning">All form fields are required.</p>
                     </div>
                     <div class="modal-footer">
-                        <button id="login-account-button" type="button" class="btn btn-primary">Create account</button>
+                        <button id="login-account-button" type="button" class="btn btn-primary">Submit</button>
                         <button id="close-login-account-button" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
-        </div>    
+        </div>      
 
         <!-- verify account form -->
         <div class="modal fade" id="verify-account-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -105,17 +111,17 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                        <h4 class="modal-title">Modal title</h4>
                     </div>
                     <div class="modal-body">
-                        <div title="Verify account">
-                            <p class="validateTips">All form fields are required.</p>
+                        <div title="Verify account">                            
                             <form autocomplete="off">
-                                <fieldset>
+                                <div class="form-group">
                                     <label for="verificationInput">Verification code</label>
-                                    <input type="text" name="verificationInput" id="verificationInput" value="" class="text ui-widget-content ui-corner-all">
-                                </fieldset>
+                                    <input type="text" name="verificationInput" id="verificationInput" value="" class="form-control text ui-widget-content ui-corner-all">
+                                </div>
                             </form>
+							<p class="validateTips alert alert-warning">All form fields are required.</p>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -128,7 +134,7 @@
 
 
         <!-- div that holds code that gets displayed in code window at runtime -->
-        <div id="this-file" style="display:none;">
+        <div id="this-file" class="hidden">
             <?php
             $file = file_get_contents('./js/runexample.js', FILE_USE_INCLUDE_PATH);
             $escapedFile = str_replace(">", "&gt;", str_replace("<", "&lt;", str_replace("&", "&amp;", $file)));
@@ -146,7 +152,6 @@
         <script src="../js/bootstrap.js"></script>
         <script src="../js/showcode.js"></script>
         <script src="../js/validation.js"></script>
-        <script src="../js/tips.js"></script>
         <script src="./js/runexample.js"></script>
     </body>
 </html>
