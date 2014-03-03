@@ -1,0 +1,49 @@
+<?php 
+	$this->headLink()->appendStylesheet('/src/css/single-page-funnel-frame.css');
+	$this->headScript()
+			->appendFile('/src/js/showcode.js')
+			->appendFile('/src/js/validation.js')
+			->appendFile('/src/js/runexample.js');
+?>
+<div class="container">
+	<div class="row">
+		<div class="col-md-9 col-md-offset-1 col-sm-10 col-sm-offset-1">
+			<hr />
+			<div class="row">
+				<div id="example" class="col-md-12">
+					<div class="main-listing">
+						<div class="row">
+							<div class="col-md-9">
+								<div class="help-icons single-funnel"></div>
+								<h1>Single page funnel</h1> 
+							</div>
+							<div class="col-md-3 right">
+								<a href="#"><i class="fa fa-star orange"></i> Favorited</a>
+							</div>
+						</div>
+						<p>
+							This example illustrates how to use Google Analytics virtual pageviews to create a funnel that tracks conversion success for a multi-step account creation process. </p>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu turpis eu magna interdum mollis nec sollicitudin arcu. Integer vitae odio suscipit, sagittis felis id, auctor libero. Nullam malesuada augue non ipsum facilisis pulvinar. Sed gravida commodo metus, id varius dui lobortis vitae. Ut et massa massa. 
+						</p>
+						<p>
+							<a id="run-example-button" class="btn btn-sm btn-primary">Run example &raquo;</a>
+						</p>
+					</div>
+				</div>
+				<div class="col-md-12 run-ui hidden">
+					<iframe src="/ex/single-page-funnel-frame" height="100%" width="100%"></iframe>
+				</div>
+				<div class="col-md-12 run-code hidden">
+					<h3 class="code-header">Code window</h3>
+					<div class="panel-body-wrapper">
+						<div class="wide">
+							<pre id="code-window" class="scroller-area"></pre>
+						</div>
+					</div>                    
+				</div>
+			</div>
+			<hr />
+		</div>
+	</div>
+</div>
