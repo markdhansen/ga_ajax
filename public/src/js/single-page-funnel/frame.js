@@ -11,6 +11,10 @@
 			this.dom.signupBtn.addEventListener('click', this, false);
 			this.dom.loginBtn.addEventListener('click', this, false);
 		},
+		removeListeners: function() {
+			this.dom.signupBtn.removeEventListener('click', this, false);
+			this.dom.loginBtn.removeEventListener('click', this, false);
+		},
 		handleEvent: function(e) {
 			switch (e.currentTarget) {
 				case this.dom.signupBtn:
@@ -19,17 +23,18 @@
 				case this.dom.loginBtn:
 					this.showLoginModal();
 					break;
-			}	
+			}
 		},
 		showSignupModal: function() {
 			var modal = new dbm.Modal(),
-				form = this.createSignupForm();
-			
+				form = this.createSignupForm(),
+				userSubmit = false;
+
 			modal.setTitle('Create New Account');
 			modal.setContent(form);
 			modal.setBtnText(dbm.Modal.BTN_PRIME, 'Create Account');
 			modal.setBtnText(dbm.Modal.BTN_SECOND, 'Close');
-			
+
 			modal.on(dbm.Modal.SUCCESS, function() {
 				dbm.removeWarning();
 				var validator = new dbm.Validate({
@@ -39,24 +44,35 @@
 					password: passwordValidate,
 					alert: true
 				});
-				
+
 				if (validator.isValid()) {
 					dbm.showCode("_user_create_account_submit");
 					_gaq.push(["_trackPageview", "/user/create-account/submit"]);
+					userSubmit = true;
 					modal.close();
 				}
 			});
-			modal.on(dbm.Modal.HIDDEN, function() {
-				this.destroy();
+
+			modal.on(dbm.Modal.CLOSE, function() {
+				if (!userSubmit) {
+					dbm.showCode("_user_create_account_close");
+					_gaq.push(["_trackPageview", "/user/create-account/close"]);
+				}
+				userSubmit = false;
 			});
-			
+
+			modal.on(dbm.Modal.HIDDEN, function() { this.destroy(); });
+
 			modal.open();
+
+			dbm.showCode("_user_create_account_open");
+			_gaq.push(["_trackPageview", "/user/create-account/open"]);
 		},
 		createSignupForm: function() {
 			var form = document.createElement('form');
-			form.innerHTML = '<div class="form-group"><label>Username</label>' + 
+			form.innerHTML = '<div class="form-group"><label>Username</label>' +
 					'<input type="text" name="username" class="form-control username" required="required" placeholder="Enter username" />' +
-					'</div><div class="form-group"><label>Email</label>' + 
+					'</div><div class="form-group"><label>Email</label>' +
 					'<input class="form-control email" required="required" type="email" name="email" placeholder="Enter email" />' +
 					'</div><div class="form-group"><label >Password</label>' +
 					'<input class="form-control password" type="password" name="password" required="required" placeholder="Password" /></div>';
@@ -64,14 +80,15 @@
 		},
 		showLoginModal: function() {
 			var modal = new dbm.Modal(),
-				form = this.createSignupForm();
-				
-			
+				form = this.createLoginForm(),
+				userSubmit = false;
+
+
 			modal.setTitle('Login');
 			modal.setContent(form);
 			modal.setBtnText(dbm.Modal.BTN_PRIME, 'Submit');
 			modal.setBtnText(dbm.Modal.BTN_SECOND, 'Close');
-			
+
 			modal.on(dbm.Modal.SUCCESS, function() {
 				dbm.removeWarning();
 				var validator = new dbm.Validate({
@@ -80,22 +97,33 @@
 					password: passwordValidate,
 					alert: true
 				});
-				
+
 				if (validator.isValid()) {
 					dbm.showCode("_user_login_submit");
 					_gaq.push(["_trackPageview", "/user/login/submit"]);
+					userSubmit = true;
 					modal.close();
 				}
 			});
-			modal.on(dbm.Modal.HIDDEN, function() {
-				this.destroy();
+
+			modal.on(dbm.Modal.CLOSE, function() {
+				if (!userSubmit) {
+					dbm.showCode("_user_login_close");
+					_gaq.push(["_trackPageview", "/user/login/close"]);
+				}
+				userSubmit = false;
 			});
-			
+
+			modal.on(dbm.Modal.HIDDEN, function() { this.destroy(); });
+
 			modal.open();
+
+			dbm.showCode("_user_login_open");
+			_gaq.push(["_trackPageview", "/user/login/open"]);
 		},
 		createLoginForm: function() {
 			var form = document.createElement('form');
-			form.innerHTML = '<div class="form-group"><label>Email</label>' + 
+			form.innerHTML = '<div class="form-group"><label>Email</label>' +
 					'<input class="form-control email" required="required" type="email" name="email" placeholder="Enter email" />' +
 					'</div><div class="form-group"><label >Password</label>' +
 					'<input class="form-control password" type="password" name="password" required="required" placeholder="Password" /></div>';
@@ -117,8 +145,12 @@
 		} else {
 			return "Password may consist of 5-16 letters or numbers";
 		}
-	};
-	
-	$(document).ready(function() { SingleFunnel.init(); });
-	
+	},
+	_gaq;
+
+	$(document).ready(function() {
+		_gaq = window._gaq || [];
+		SingleFunnel.init();
+	});
+
 })(window.Dbm, window.jQuery);
