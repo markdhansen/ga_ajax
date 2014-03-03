@@ -1,0 +1,16 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 3, 2014, 3:30:37 PM
+    Author     : digitalbrandmine
+*/
+
+.form-error {
+    color: #B94A48;
+    margin-bottom: 0;
+    padding: 5px;
+	font-size: 0.9em;
+}
