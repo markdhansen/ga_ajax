@@ -43,8 +43,9 @@ class SinglePageFunnelController extends BaseController {
 				}
 			}
 		}
-
-		return Response::make(json_encode($res));
+		$response = Response::make(json_encode($res));
+		$response->header('Content-Type', 'application/json');
+		return $res;
 	}
 	public function login() {
 
