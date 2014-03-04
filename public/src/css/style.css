@@ -128,8 +128,8 @@ a.btn.btn-inverse{color: #c000c0
 }
 a.btn.btn-inverse:hover {color:#fff}
 
-button.btn.btn-default.btn-block {
-    margin-bottom:10px !important;
+.listings .btn-block {
+    margin-bottom:10px;
     border:1px solid rgba(255,255,255,.9);
 }
 
