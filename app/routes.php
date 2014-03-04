@@ -16,5 +16,7 @@
 //	return View::make('hello');
 //});
 Route::get('/', 'HomeController@index');
-Route::get('/single-page-funnel', 'HomeController@singlePageFunnel');
-Route::get('/single-page-funnel/frame', 'HomeController@singlePageFunnelFrame');
+Route::get('/single-page-funnel', 'SinglePageFunnelController@index');
+Route::get('/single-page-funnel/frame', 'SinglePageFunnelController@frame');
+Route::post('/single-page-funnel/signup', 'SinglePageFunnelController@signup');
+Route::post('/single-page-funnel/login', 'SinglePageFunnelController@login');

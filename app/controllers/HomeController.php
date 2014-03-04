@@ -17,17 +17,8 @@ class HomeController extends BaseController {
 
 	protected $layout = 'layouts.master';
 
-	public function showWelcome() {
-		return View::make('hello');
-	}
 	public function index() {
 		return View::make('index');
-	}
-	public function singlePageFunnel() {
-		$this->layout->content = View::make('single-page-funnel.index');
-	}
-	public function singlePageFunnelFrame() {
-		$this->layout->content = View::make('single-page-funnel.frame');
 	}
 	public function missingMethod($parameters = array()) {
 		echo 'method not found';

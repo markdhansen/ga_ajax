@@ -4,7 +4,7 @@
 		doc = window.parent.document,
 		len = codeArr.length;
 	
-	function showCode(symbol) {
+	function showCode(page) {
 		var codeSegment = "",
 			i = -1,
 			codeWindow = doc.getElementById("code-window"),
@@ -16,10 +16,9 @@
 		// - Remove lines with calls to dbm.showCode.
 		// - Highlight the line with the call to _gaq.push
 		while (++i < len) {
-			if (codeArr[i].indexOf("dbm.showCode(") !== -1) {
-				if (codeArr[i].indexOf(symbol) !== -1 && codeArr[i+1].indexOf("_gaq.push") !== -1) {
-					codeSegment += "<div id='_scTopLine' class='highlighter'>" + codeArr[++i] + "</div>";
-				}
+			if (codeArr[i].indexOf("dbm.showCode(") !== -1) { continue; }
+			if (codeArr[i].indexOf("_gaq.push") !== -1 && codeArr[i].indexOf(page) !== -1) {
+				codeSegment += "<div id='_scTopLine' class='highlighter'>" + codeArr[i] + "</div>";
 			} else {
 				codeSegment += codeArr[i] + EOL;
 			}	

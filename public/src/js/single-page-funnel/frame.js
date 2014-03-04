@@ -46,17 +46,28 @@
 				});
 
 				if (validator.isValid()) {
-					dbm.showCode("_user_create_account_submit");
-					_gaq.push(["_trackPageview", "/user/create-account/submit"]);
+					dbm.showProgress('Verifying');
+					dbm.showCode("/user/signup/submit");
+					_gaq.push(["_trackPageview", "/user/signup/submit"]);
 					userSubmit = true;
+					$.post('/single-page-funnel/signup', validator.data(), 'json')
+					.done(function(res) {
+						dbm.hideProgress();
+						if (res && res.success) {
+
+						} else if (res && res.error) {
+							alert(res.error);
+						}
+					})
+					.fail(dbm.errorHandler);
 					modal.close();
 				}
 			});
 
 			modal.on(dbm.Modal.CLOSE, function() {
 				if (!userSubmit) {
-					dbm.showCode("_user_create_account_close");
-					_gaq.push(["_trackPageview", "/user/create-account/close"]);
+					dbm.showCode("/user/signup/close");
+					_gaq.push(["_trackPageview", "/user/signup/close"]);
 				}
 				userSubmit = false;
 			});
@@ -65,8 +76,8 @@
 
 			modal.open();
 
-			dbm.showCode("_user_create_account_open");
-			_gaq.push(["_trackPageview", "/user/create-account/open"]);
+			dbm.showCode("/user/signup/open");
+			_gaq.push(["_trackPageview", "/user/signup/open"]);
 		},
 		createSignupForm: function() {
 			var form = document.createElement('form');
@@ -99,7 +110,7 @@
 				});
 
 				if (validator.isValid()) {
-					dbm.showCode("_user_login_submit");
+					dbm.showCode("/user/login/submit");
 					_gaq.push(["_trackPageview", "/user/login/submit"]);
 					userSubmit = true;
 					modal.close();
@@ -108,7 +119,7 @@
 
 			modal.on(dbm.Modal.CLOSE, function() {
 				if (!userSubmit) {
-					dbm.showCode("_user_login_close");
+					dbm.showCode("/user/login/close");
 					_gaq.push(["_trackPageview", "/user/login/close"]);
 				}
 				userSubmit = false;
@@ -118,7 +129,7 @@
 
 			modal.open();
 
-			dbm.showCode("_user_login_open");
+			dbm.showCode("/user/login/open");
 			_gaq.push(["_trackPageview", "/user/login/open"]);
 		},
 		createLoginForm: function() {
