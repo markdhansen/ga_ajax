@@ -56,7 +56,7 @@
 						if (res && res.success) {
 
 						} else if (res && res.error) {
-							alert(res.error);
+							top.alert(res.error);
 						}
 					})
 					.fail(dbm.errorHandler);
@@ -157,10 +157,12 @@
 			return "Password may consist of 5-16 letters or numbers";
 		}
 	},
+	top,
 	_gaq;
 
 	$(document).ready(function() {
-		_gaq = window._gaq || [];
+		top = window.parent;
+		_gaq = top._gaq || window._gaq || [];
 		SingleFunnel.init();
 	});
 
