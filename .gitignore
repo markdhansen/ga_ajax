@@ -2,4 +2,4 @@
 nbproject/
 !.gitignore
 phpMyAdmin/
-.env.local*
+.env.*

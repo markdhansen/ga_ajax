@@ -10,7 +10,7 @@
         @section('stylesheet')
 		<link rel="stylesheet" type="text/css" media="all" href="/lib/css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" media="all" href="/lib/css/font-awesome.css" />
-		<link rel="stylesheet" type="text/css" media="all" href="/src/css/style.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="/src/css/global.css" />
 		@show
 		@section('ga_tracking')
 		<script type = "text/javascript">

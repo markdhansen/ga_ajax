@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.mailgun.org',
+	'host' => 'smtp.sendgrid.net',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,9 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+	'from' => array('address' => "mark@gaexamples.com", 'name' => "GAExamples"),
+	
+	'reply-to' => array('address'=> 'mark@gaexamples.com', 'name'=> 'GAExamples'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +82,7 @@ return array(
 	|
 	*/
 
-	'username' => null,
+	'username' => $_ENV['mail']['username'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +95,7 @@ return array(
 	|
 	*/
 
-	'password' => null,
+	'password' => $_ENV['mail']['password'],
 
 	/*
 	|--------------------------------------------------------------------------

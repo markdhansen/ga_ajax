@@ -4,6 +4,7 @@
 body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing:antialiased;
+    background:none repeat scroll 0 0 rgb(37, 37, 39);
 }
 
 /* Colors */
@@ -112,40 +113,61 @@ body {
     height: 100%;
 }
 
-body {
-    /*padding-bottom:0 !important;*/
-    background:none repeat scroll 0 0 rgb(37, 37, 39);
-}
 iframe {
 	border: none;
 }
 h1 {color: #4e004e}
 .highlight {background:yellow}
-.listings {padding:30px}
 
+/** Progress indicator **/
+
+.dbm-progress {
+	background: rgba(0,0,0,0.6);
+	border-radius: 4px;
+	color: #fff;
+	font-size: 30px;
+	position: fixed;
+	z-index: 1200;
+}
+.dbm-progress.running {
+	padding: 20px 50px 20px 30px;
+}
+.dbm-progress.stopped {
+	padding: 20px 30px;
+}
+.dbm-progress.stopped img {
+	display: none;
+}
+.dbm-progress .dot {
+	position: absolute;
+}
+.dbm-progress img {
+    height: 32px;
+    margin-right: 10px;
+	margin-bottom: 4px;
+    width: 32px;
+}
+@media only screen and (max-width: 767px) {
+	.dbm-progress {
+		font-size: 25px;
+	}
+	.dbm-progress.running {
+		padding: 10px 30px 10px 15px;
+	}
+	.dbm-progress.stopped {
+		padding: 10px 15px;
+	}
+	.dbm-progress img {
+		height: 25px;
+		margin-right: 5px;
+		width: 25px;
+	}
+	
+}	
 .btn.up a {text-decoration:none}
 a.btn.btn-inverse{color: #c000c0
 }
 a.btn.btn-inverse:hover {color:#fff}
-
-.listings .btn-block {
-    margin-bottom:10px;
-    border:1px solid rgba(255,255,255,.9);
-}
-
-.desc {
-    padding:10px 25px;
-    background: rgba(255,255,255,.9);
-    margin-bottom:10px;
-    border-radius:5px;	
-    margin-bottom:30px;
-}
-
-.desc  hr {
-    margin:10px 0;	
-    background: rgba(255,255,255,.9);
-    border-bottom: rgba(255,255,255,.9);
-}
 
 .logo a {
     padding:10px;
@@ -157,16 +179,6 @@ a.btn.btn-inverse:hover {color:#fff}
     font-weight:bold;
     text-decoration:none	
 }
-
-.loginbox {padding-top:5px}
-
-.form-group.filter {
-    background: rgba(255,255,255,.9);
-    padding:10px;
-    border-radius:5px;
-    border:1px solid rgba(255,255,255,.9);	
-}
-
 
 hr {
     border-bottom: 1px solid #CCCCCC;
@@ -184,6 +196,7 @@ h3 {
 .topnav {
 	background: linear-gradient(rgb(17, 17, 17), rgb(34, 34, 34)) repeat scroll 0 0 transparent;
 	border-bottom: 1px solid rgb(61, 61, 61);
+	border-radius: 0;
 }
 .help-icons {
     height:64px;
@@ -201,23 +214,14 @@ h3 {
     background-position: -81px -20px;
 }
 
-.main-listing {
-    background:#fff;
-    padding:20px 60px;
-    margin-bottom:20px;
-    border-radius:5px;
-    border:1px solid rgba(255,255,255,.9);	
-    box-shadow: 0 1px 6px rgba(0,0,0,.4);	
-}
-
-.main-listing .help-icons {
-    float:left;	
-}
 .highlighter {
 	background-color: yellow;
 }
 
-.results {color:#fff;margin-bottom:20px;opacity: .4;
+.results {
+	color:#fff;
+	margin-bottom:20px;
+	opacity: .4;
 }
 
 

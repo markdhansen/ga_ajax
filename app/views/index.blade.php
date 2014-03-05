@@ -1,7 +1,11 @@
 @extends('layouts.master')
+@section('stylesheet')
+	@parent
+	<link rel="stylesheet" type="text/css" media="all" href="/src/css/home.css" />
+@stop	
 @section('scripts')
-@parent
-<script src="/src/js/modules/Dbm.js"></script>
+	@parent
+	<script src="/src/js/modules/Dbm.js"></script>
 @stop
 @section('content')
 <div class="container">

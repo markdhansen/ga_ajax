@@ -28,7 +28,10 @@
 		showSignupModal: function() {
 			var modal = new dbm.Modal(),
 				form = this.createSignupForm(),
-				userSubmit = false;
+				userSubmit = false,
+				busy = false,
+				self = this;
+
 
 			modal.setTitle('Create New Account');
 			modal.setContent(form);
@@ -36,6 +39,8 @@
 			modal.setBtnText(dbm.Modal.BTN_SECOND, 'Close');
 
 			modal.on(dbm.Modal.SUCCESS, function() {
+				if (busy) { return; }
+
 				dbm.removeWarning();
 				var validator = new dbm.Validate({
 					form: form,
@@ -43,24 +48,38 @@
 					email: 'email_val',
 					password: passwordValidate,
 					alert: true
-				});
+				}),
+				data;
 
 				if (validator.isValid()) {
+					busy = true;
 					dbm.showProgress('Verifying');
 					dbm.showCode("/user/signup/submit");
 					_gaq.push(["_trackPageview", "/user/signup/submit"]);
-					userSubmit = true;
-					$.post('/single-page-funnel/signup', validator.data(), 'json')
+					data = validator.data();
+
+					$.post('/single-page-funnel/signup', data, 'json')
 					.done(function(res) {
+						busy = false;
 						dbm.hideProgress();
 						if (res && res.success) {
-
+							userSubmit = true;
+							modal.off(dbm.Modal.HIDDEN);
+							modal.on(dbm.Modal.HIDDEN, function() {
+								self.showVerificationModal(data.username, data.email);
+								this.destroy();
+								self = modal = null;
+							});
+							modal.close();
+							dbm.showCode("/user/signup/email-sent");
+							_gaq.push(["_trackPageview", "/user/signup/email-sent"]);
 						} else if (res && res.error) {
 							top.alert(res.error);
+							dbm.showCode("/user/signup/fail");
+							_gaq.push(["_trackPageview", "/user/signup/fail"]);
 						}
 					})
-					.fail(dbm.errorHandler);
-					modal.close();
+					.fail(function(res) { busy = false; dbm.errorHandler(res); });
 				}
 			});
 
@@ -72,7 +91,10 @@
 				userSubmit = false;
 			});
 
-			modal.on(dbm.Modal.HIDDEN, function() { this.destroy(); });
+			modal.on(dbm.Modal.HIDDEN, function() {
+				this.destroy();
+				modal = self = null;
+			});
 
 			modal.open();
 
@@ -89,10 +111,86 @@
 					'<input class="form-control password" type="password" name="password" required="required" placeholder="Password" /></div>';
 			return form;
 		},
+		showVerificationModal: function(username, email) {
+			var modal = new dbm.Modal(),
+				form = this.createVerificationForm(),
+				userSubmit = false,
+				busy = false,
+				self = this;
+
+			modal.setTitle('Verify Account');
+			modal.setContent(form);
+			modal.setBtnText(dbm.Modal.BTN_PRIME, 'Submit');
+			modal.setBtnText(dbm.Modal.BTN_SECOND, 'Close');
+
+			modal.on(dbm.Modal.SUCCESS, function() {
+				if (busy) { return; }
+
+				dbm.removeWarning();
+				var validator = new dbm.Validate({
+					form: form,
+					verificationCode: 'isNotEmpty',
+					alert: true
+				}),
+				data;
+
+				if (validator.isValid()) {
+					busy = true;
+					dbm.showProgress('Verifying');
+					dbm.showCode("/user/verify-signup/submit");
+					_gaq.push(["_trackPageview", "/user/verify-signup/submit"]);
+					data = validator.data();
+					data.username = username;
+					data.email = email;
+					$.post('/single-page-funnel/signup/verify', data, 'json')
+					.done(function(res) {
+						busy = false;
+						dbm.hideProgress();
+						if (res && res.success) {
+							userSubmit = true;
+							modal.close();
+							dbm.showCode("/user/verify-signup/success");
+							_gaq.push(["_trackPageview", "/user/verify-signup/success"]);
+						} else if (res && res.error) {
+							top.alert(res.error);
+							dbm.showCode("/user/verify-signup/fail");
+							_gaq.push(["_trackPageview", "/user/verify-signup/fail"]);
+						}
+					})
+					.fail(function(res) { busy = false; dbm.errorHandler(res); });
+				}
+			});
+
+			modal.on(dbm.Modal.CLOSE, function() {
+				if (!userSubmit) {
+					dbm.showCode("/user/verify-signup/close");
+					_gaq.push(["_trackPageview", "/user/verify-signup/close"]);
+				}
+				userSubmit = false;
+			});
+
+			modal.on(dbm.Modal.HIDDEN, function() {
+				this.destroy();
+				modal = self = null;
+			});
+
+			modal.open();
+
+			dbm.showCode("/user/verify-signup/open");
+			_gaq.push(["_trackPageview", "/user/verify-signup/open"]);
+		},
+		createVerificationForm: function() {
+			var form = document.createElement('form');
+			form.innerHTML = '<div class="form-group"><label>Verification Code</label>' +
+					'<input type="text" name="verificationCode" class="form-control verification" required="required" placeholder="Enter your verification code" />' +
+					'</div>';
+			return form;
+		},
 		showLoginModal: function() {
 			var modal = new dbm.Modal(),
 				form = this.createLoginForm(),
-				userSubmit = false;
+				userSubmit = false,
+				busy = false;
 
 
 			modal.setTitle('Login');
@@ -101,19 +199,41 @@
 			modal.setBtnText(dbm.Modal.BTN_SECOND, 'Close');
 
 			modal.on(dbm.Modal.SUCCESS, function() {
+				if (busy) { return; }
+
 				dbm.removeWarning();
 				var validator = new dbm.Validate({
 					form: form,
 					email: 'email_val',
 					password: passwordValidate,
 					alert: true
-				});
+				}),
+				data;
 
 				if (validator.isValid()) {
+					busy = true;
 					dbm.showCode("/user/login/submit");
+					dbm.showProgress('Verifying');
 					_gaq.push(["_trackPageview", "/user/login/submit"]);
-					userSubmit = true;
-					modal.close();
+					data = validator.data();
+
+					$.post('/single-page-funnel/login', data, 'json')
+					.done(function(res) {
+						busy = false;
+						dbm.hideProgress();
+						if (res && res.success) {
+							userSubmit = true;
+							modal.close();
+							dbm.showCode("/user/login/success");
+							_gaq.push(["_trackPageview", "/user/login/success"]);
+							alert("Congratulations!  You are logged in with username: " + res.username);
+						} else if (res && res.error) {
+							top.alert(res.error);
+							dbm.showCode("/user/login/fail");
+							_gaq.push(["_trackPageview", "/user/login/fail"]);
+						}
+					})
+					.fail(function(res) { busy = false; dbm.errorHandler(res); });
 				}
 			});
 
@@ -162,7 +282,7 @@
 
 	$(document).ready(function() {
 		top = window.parent;
-		_gaq = top._gaq || window._gaq || [];
+		_gaq = top._gaq;
 		SingleFunnel.init();
 	});
 

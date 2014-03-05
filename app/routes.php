@@ -19,4 +19,5 @@ Route::get('/', 'HomeController@index');
 Route::get('/single-page-funnel', 'SinglePageFunnelController@index');
 Route::get('/single-page-funnel/frame', 'SinglePageFunnelController@frame');
 Route::post('/single-page-funnel/signup', 'SinglePageFunnelController@signup');
+Route::post('/single-page-funnel/signup/verify', 'SinglePageFunnelController@verifySignup');
 Route::post('/single-page-funnel/login', 'SinglePageFunnelController@login');

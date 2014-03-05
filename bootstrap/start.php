@@ -24,11 +24,16 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
-
-	'local' => array('Yarons-MacBook-Pro.local'),
-
-));
+$env = $app->detectEnvironment(function() {
+	if ($_SERVER['HTTP_HOST'] === 'gaexamples.localhost') {
+		return 'local';
+	}
+});
+//$env = $app->detectEnvironment(array(
+//
+//	'local' => array('Yarons-MacBook-Pro.local', 'Yaron-DBM.local'),
+//
+//));
 
 /*
 |--------------------------------------------------------------------------

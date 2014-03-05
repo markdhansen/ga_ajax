@@ -1,0 +1,52 @@
+.listings {padding:30px}
+
+.listings .btn-block {
+    margin-bottom:10px;
+    border:1px solid rgba(255,255,255,.9);
+}
+
+.desc {
+    padding:10px 25px;
+    background: rgba(255,255,255,.9);
+    margin-bottom:10px;
+    border-radius:5px;	
+    margin-bottom:30px;
+}
+
+.desc  hr {
+    margin:10px 0;	
+    background: rgba(255,255,255,.9);
+    border-bottom: rgba(255,255,255,.9);
+}
+
+.loginbox {padding-top:5px}
+
+.form-group.filter {
+    background: rgba(255,255,255,.9);
+    padding:10px;
+    border-radius:5px;
+    border:1px solid rgba(255,255,255,.9);	
+}
+
+.help-icons {
+    height:64px;
+    width:64px;
+	background-image: url(/images/sprite.png);
+	background-size:200px;
+    margin:auto;
+}
+
+.outbound-links .help-icons {
+	background-position: -10px -10px;
+}
+
+.single-funnel .help-icons {
+    background-position: -81px -20px;
+}
+
+.highlighter {
+	background-color: yellow;
+}
+
+
+
