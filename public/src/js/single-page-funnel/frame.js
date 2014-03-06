@@ -1,5 +1,5 @@
 (function(dbm, $) {
-	var SingleFunnel = {
+	var SinglePageFunnel = {
 		init: function() {
 			this.dom = {
 				signupBtn: document.getElementById('signup-btn'),
@@ -283,7 +283,7 @@
 	$(document).ready(function() {
 		top = window.parent;
 		_gaq = top._gaq;
-		SingleFunnel.init();
+		SinglePageFunnel.init();
 	});
 
 })(window.Dbm, window.jQuery);

@@ -2,7 +2,8 @@
 	var EOL = "\n",
 		codeArr = document.getElementById('this-file').innerHTML.trim().split(EOL),
 		doc = window.parent.document,
-		len = codeArr.length;
+		len = codeArr.length,
+		prettyPrint = window.prettyPrint || (window.top && window.top.prettyPrint) || function() {};
 	
 	function showCode(page) {
 		var codeSegment = "",
@@ -25,6 +26,8 @@
 		}
 		
 		codeWindow.innerHTML = codeSegment;
+		dbm.removeClass(codeWindow, 'prettyprinted')
+		prettyPrint();
 
 	//Scroll the highlighted row to the center of the code window.	
 		highlightRow = doc.getElementById("_scTopLine");

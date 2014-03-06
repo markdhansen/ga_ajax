@@ -1,10 +1,12 @@
 @extends('layouts.master')
 @section('stylesheet')
 	@parent
+	<link href='/lib/css/prettify.css' rel='stylesheet' media="all" />
 	<link href='/src/css/single-page-funnel-frame.css' rel='stylesheet' media="all" />
 @stop
 @section('scripts')
 	@parent
+	<script src='/lib/js/prettify.js'></script>
 	<script src='/src/js/modules/Dbm.js'></script>
 	<script src='/src/js/validation.js'></script>
 	<script src='/src/js/runexample.js'></script>
@@ -44,7 +46,7 @@
 					<div class="col-md-12 run-code">
 						<h3 class="code-header">Code window</h3>
 						<div class="panel-body-wrapper">
-							<pre id="code-window" class="scroller-area"></pre>
+							<pre id="code-window" class="scroller-area prettyprint linenums"></pre>
 						</div>                    
 					</div>
 				</div>

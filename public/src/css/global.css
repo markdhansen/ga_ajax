@@ -116,6 +116,10 @@ body {
 iframe {
 	border: none;
 }
+.scroller-area ol.linenums {
+	margin: 0;
+}
+
 h1 {color: #4e004e}
 .highlight {background:yellow}
 
