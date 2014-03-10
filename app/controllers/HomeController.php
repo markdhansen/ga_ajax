@@ -20,8 +20,4 @@ class HomeController extends BaseController {
 	public function index() {
 		return View::make('index');
 	}
-	public function missingMethod($parameters = array()) {
-		echo 'method not found';
-	}
-
 }
